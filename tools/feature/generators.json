@@ -4,6 +4,11 @@
       "factory": "./src/generators/component/generator",
       "schema": "./src/generators/component/schema.json",
       "description": "Creates a component for a NextJs application"
+    },
+    "hook": {
+      "factory": "./src/generators/hook/generator",
+      "schema": "./src/generators/hook/schema.json",
+      "description": "Creates a hook for a NextJs application"
     }
   }
 }
