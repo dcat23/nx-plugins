@@ -34,6 +34,10 @@ export async function presetGenerator(
   return presetGeneratorInternal(host, {
     componentLibrary: "mui",
     database: "postgres",
+    authType: "github",
+    style: "css",
+    addPlugin: false,
+    projectNameAndRootFormat: 'derived',
     ...schema
   })
 }

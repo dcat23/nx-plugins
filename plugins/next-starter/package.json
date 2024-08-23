@@ -1,9 +1,10 @@
 {
   "name": "@dcat23/next-starter",
-  "version": "0.0.1",
+  "version": "0.0.1-dev2",
   "dependencies": {
     "@nx/devkit": "19.6.2",
     "@nx/next": "19.6.2",
+    "@nx/react": "19.6.2",
     "tslib": "^2.3.0"
   },
   "type": "commonjs",

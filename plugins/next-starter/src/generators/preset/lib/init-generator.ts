@@ -35,7 +35,7 @@ function updateDependencies(host: Tree, schema: InitSchema) {
       },
       {
         '@nx/next': nxVersion,
-        '@dcat23/nx-feature': featureVersion,
+        '@dcat23/nx-feature': latestVersion,
         'prisma': prismaVersion,
       },
       undefined,
@@ -61,24 +61,24 @@ export async function nextInitGeneratorInternal(
 
   schema.addPlugin ??= addPluginDefault;
   if (schema.addPlugin) {
-    const { createNodes } = await import('@nx/next/src/plugins/plugin');
-    await addPluginV1(
-      host,
-      await createProjectGraphAsync(),
-      '@nx/next/plugin',
-      createNodes,
-      {
-        startTargetName: ['start', 'next:start', 'next-start'],
-        buildTargetName: ['build', 'next:build', 'next-build'],
-        devTargetName: ['dev', 'next:dev', 'next-dev'],
-        serveStaticTargetName: [
-          'serve-static',
-          'next:serve-static',
-          'next-serve-static',
-        ],
-      },
-      schema.updatePackageScripts
-    );
+    // const { createNodes } = await import('@nx/next/src/plugins/plugin');
+    // await addPluginV1(
+    //   host,
+    //   await createProjectGraphAsync(),
+    //   '@nx/next/plugin',
+    //   createNodes,
+    //   {
+    //     startTargetName: ['start', 'next:start', 'next-start'],
+    //     buildTargetName: ['build', 'next:build', 'next-build'],
+    //     devTargetName: ['dev', 'next:dev', 'next-dev'],
+    //     serveStaticTargetName: [
+    //       'serve-static',
+    //       'next:serve-static',
+    //       'next-serve-static',
+    //     ],
+    //   },
+    //   schema.updatePackageScripts
+    // );
   }
 
   addGitIgnoreEntry(host);
