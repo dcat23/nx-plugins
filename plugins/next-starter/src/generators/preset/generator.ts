@@ -14,7 +14,6 @@ import {setupTailwindGenerator} from '@nx/react';
 import {addStyleDependencies} from '@nx/next/src/utils/styles';
 import {updateJestConfig} from '@nx/next/src/generators/application/lib/update-jest-config';
 import {updateCypressTsConfig} from '@nx/next/src/generators/application/lib/update-cypress-tsconfig';
-import {setDefaults} from '@nx/next/src/generators/application/lib/set-defaults';
 import {customServerGenerator} from '@nx/next/src/generators/custom-server/custom-server';
 import {testingLibraryReactVersion, typesReactDomVersion, typesReactVersion} from '@nx/react/src/utils/versions';
 import {addLinting} from '@nx/next/src/generators/application/lib/add-linting';
@@ -26,6 +25,7 @@ import {addMuiDependencies} from './lib/utils';
 import initGenerator from "../init/generator";
 import {addProject} from "./lib/add-project";
 import {addFeature} from "./lib/add-feature";
+import {setDefaults} from "./lib/set-defaults";
 
 export async function presetGenerator(
   host: Tree,
