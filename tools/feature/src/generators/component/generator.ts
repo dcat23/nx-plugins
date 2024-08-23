@@ -1,25 +1,23 @@
-import {
-  addProjectConfiguration,
-  formatFiles,
-  generateFiles,
-  Tree,
-} from '@nx/devkit';
-import * as path from 'path';
+import { Tree } from '@nx/devkit';
 import { ComponentGeneratorSchema } from './schema';
+import { addToIndex, normalizeOptions } from '../../lib/utils';
+import { createComponentFile } from './lib/create-component-file';
+
 
 export async function componentGenerator(
   tree: Tree,
   options: ComponentGeneratorSchema
 ) {
-  const projectRoot = `libs/${options.name}`;
-  addProjectConfiguration(tree, options.name, {
-    root: projectRoot,
-    projectType: 'library',
-    sourceRoot: `${projectRoot}/src`,
-    targets: {},
-  });
-  generateFiles(tree, path.join(__dirname, 'files'), projectRoot, options);
-  await formatFiles(tree);
+  const opts = await normalizeOptions(
+    tree,
+    'components',
+    '@dcat23/nx-feature:component',
+    options,
+  );
+
+  createComponentFile(tree, opts);
+
+  addToIndex(tree, opts);
 }
 
 export default componentGenerator;
