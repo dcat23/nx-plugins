@@ -1,15 +1,7 @@
-import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
-import {
-  getProjects,
-  readJson,
-  readNxJson,
-  readProjectConfiguration,
-  Tree,
-} from '@nx/devkit';
-
-import { Schema } from './schema';
-import { presetGenerator } from './generator';
-import { join } from 'path';
+import {createTreeWithEmptyWorkspace} from '@nx/devkit/testing';
+import {readJson, Tree,} from '@nx/devkit';
+import {presetGenerator} from './generator';
+import {join} from 'path';
 
 describe('app', () => {
   let tree: Tree;
