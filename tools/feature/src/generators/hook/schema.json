@@ -1,17 +1,41 @@
 {
   "$schema": "https://json-schema.org/schema",
   "$id": "Hook",
-  "title": "",
+  "title": "Create a react hook",
   "type": "object",
   "properties": {
     "name": {
       "type": "string",
-      "description": "",
+      "description": "The name for the hook component",
       "$default": {
         "$source": "argv",
         "index": 0
       },
-      "x-prompt": "What name would you like to use?"
+      "x-prompt": "What name should the hook component use?"
+    },
+    "feature": {
+      "type": "string",
+      "description": "The package name to store the hook component",
+      "$default": {
+        "$source": "argv",
+        "index": 1
+      }
+    },
+    "directory": {
+      "type": "string",
+      "description": "Where to create the hook component"
+    },
+    "skipExport": {
+      "type": "boolean",
+      "description": "Will skip adding file to index.ts"
+    },
+    "query": {
+      "type": "boolean",
+      "description": "Will create the hook with a query method"
+    },
+    "mutation": {
+      "type": "boolean",
+      "description": "Will create the hook with a mutation method"
     }
   },
   "required": ["name"]

@@ -1,0 +1,13 @@
+import { useQuery } from "@tanstack/react-query";
+
+type T = unknown;
+
+export function <%= propertyName %>()  {
+
+  return useQuery<T>({
+      queryKey: ["<%= name %>"],
+      queryFn: async () => {
+        return null;
+      },
+    });
+}
