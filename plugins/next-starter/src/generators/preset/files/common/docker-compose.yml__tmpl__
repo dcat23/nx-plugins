@@ -1,0 +1,64 @@
+services:
+  <% if (database === "postgres") { %>
+  postgres:
+    container_name: postgres_<%= constantName.toLowerCase() %>
+    image: postgres
+    environment:
+      POSTGRES_USER: ${DATABASE_USER}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+      POSTGRES_DB: ${DATABASE_NAME}
+      PGDATA: /data/postgres
+    volumes:
+      - postgres:/data/postgres
+    ports:
+      - "5432:5432"
+    networks:
+      - postgres
+    restart: unless-stopped
+
+  pgadmin:
+    container_name: pgadmin_<%= constantName.toLowerCase() %>
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-pgadmin4@pgadmin.org}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-admin}
+      PGADMIN_CONFIG_SERVER_MODE: "False"
+    volumes:
+      - pgadmin:/var/lib/pgadmin
+    ports:
+      - "5050:80"
+    networks:
+      - db
+    restart: unless-stopped
+  <% } else if (database === "mysql") { %>
+  mysql:
+    container_name: mysql_<%= constantName.toLowerCase() %>
+    image: mysql
+    environment:
+      MYSQL_USER: ${DATABASE_USER}
+      MYSQL_PASSWORD: ${DATABASE_PASSWORD}
+      MYSQL_DATABASE: ${DATABASE_NAME}
+      PGDATA: /data/postgres
+    volumes:
+      - mysql:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    networks:
+      - mysql
+    restart: unless-stopped
+  <% } %>
+
+<% if (database === "postgres") { %>
+networks:
+  postgres:
+    driver: bridge
+volumes:
+  postgres:
+  pgadmin:
+<% } else if (database === "mysql"){ %>
+networks:
+  mysql:
+    driver: bridge
+volumes:
+  mysql:
+<% } %>

@@ -1,0 +1,78 @@
+
+datasource db {
+  <% if (database === "postgres") {%>
+  provider  = "postgres"
+  <% } else if (database === "mysql") { %>
+  provider  = "mysql"
+  <% } %>
+  url       = env("DATABASE_URL")
+  schemas   = ["frontend"]
+}
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["multiSchema"]
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  <% if (authType === "github") { %>
+  gh_username   String?
+  <% } else { %>
+  username      String?
+  <% } %>
+  email         String?   @unique
+  emailVerified DateTime?
+  image         String?
+  created_at    DateTime  @default(now())
+  updated_at    DateTime  @updatedAt
+  accounts      Account[]
+  sessions      Session[]
+
+  @@schema("frontend")
+}
+
+model Account {
+  id                       String  @id @default(cuid())
+  userId                   String
+  type                     String
+  provider                 String
+  providerAccountId        String
+  refresh_token            String?
+  refresh_token_expires_in Int?
+  access_token             String?
+  expires_at               Int?
+  token_type               String?
+  scope                    String?
+  id_token                 String?
+  session_state            String?
+  oauth_token_secret       String?
+  oauth_token              String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@index([userId])
+  @@schema("frontend")
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@schema("frontend")
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+  @@schema("frontend")
+}

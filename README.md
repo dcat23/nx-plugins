@@ -1,4 +1,4 @@
-# Dcat23Nx
+# DCat23 Workspace
 
 <a alt="Nx logo" href="https://nx.dev" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="45"></a>
 
@@ -6,24 +6,47 @@
 
 Run `npx nx graph` to visually explore what got created. Now, let's get you up to speed!
 
-## Finish your CI setup
 
-[Click here to finish setting up your workspace!](https://cloud.nx.app/connect/xGeP1adQJY)
+## Usage
 
+1. Start local registry in root
+
+    ```bash
+    nx local-registry
+    ```
+
+2. Build and publish to local registry
+
+    ```bash
+    nx run-many --targets build
+    nx run-many --targets nx-release-publish
+    ```
+
+3. Create temporary project
+
+    ```bash
+    cd tmp
+    rm -rf ./macc*
+    npx nx g @dcat23/next-starter:preset macc-test-preset --directory tmp/macc-test  
+   ```
+
+## Creating a Preset Generator
+
+```sh
+npx nx generate @nx/plugin:generator --name preset --directory plugins/next-starter
+```
 
 ## Run tasks
 
-To run tasks with Nx use:
+Build task
+   ```sh
+   npx nx build next-starter
+   ```
 
-```sh
-npx nx <target> <project-name>
-```
-
-For example:
-
-```sh
-npx nx build myproject
-```
+Publish to NPM
+   ```sh
+   npx nx nx-release-publish next-starter
+   ```
 
 These targets are either [inferred automatically](https://nx.dev/concepts/inferred-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) or defined in the `project.json` or `package.json` files.
 
