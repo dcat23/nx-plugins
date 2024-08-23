@@ -8,7 +8,6 @@ import {
 } from '@nx/devkit';
 import { Schema } from './schema';
 import { showPossibleWarnings } from '@nx/next/src/generators/application/lib/show-possible-warnings';
-import { addProject } from '@nx/next/src/generators/application/lib/add-project';
 import { addE2e } from '@nx/next/src/generators/application/lib/add-e2e';
 import { addJest } from '@nx/next/src/generators/application/lib/add-jest';
 import { setupTailwindGenerator } from '@nx/react';
@@ -26,16 +25,13 @@ import { normalizeOptions } from './lib/normalize-options';
 import { addMuiDependencies } from './lib/utils';
 import { addFeature } from './lib/add-feature';
 import initGenerator from "../init/generator";
+import {addProject} from "./lib/add-project";
 
 export async function presetGenerator(
   host: Tree,
   schema: Schema
 ) {
   return presetGeneratorInternal(host, {
-    componentLibrary: "mui",
-    database: "postgres",
-    authType: "github",
-    style: "css",
     addPlugin: false,
     projectNameAndRootFormat: 'derived',
     ...schema
@@ -52,16 +48,16 @@ export async function presetGeneratorInternal(
 
   showPossibleWarnings(host, options);
 
-  const nextTask = await initGenerator(host, {
+  const initTask = await initGenerator(host, {
     ...options,
     skipFormat: true,
   });
-  tasks.push(nextTask);
+  tasks.push(initTask);
 
   createApplicationFiles(host, options);
 
   addProject(host, options);
-  addFeature(host, options);
+  // addFeature(host, options);
 
   const e2eTask = await addE2e(host, options);
   tasks.push(e2eTask);
