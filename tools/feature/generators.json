@@ -9,6 +9,11 @@
       "factory": "./src/generators/hook/generator",
       "schema": "./src/generators/hook/schema.json",
       "description": "Creates a hook for a NextJs application"
+    },
+    "api": {
+      "factory": "./src/generators/api/generator",
+      "schema": "./src/generators/api/schema.json",
+      "description": "Creates an api component for a NextJs application"
     }
   }
 }

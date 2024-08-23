@@ -30,7 +30,7 @@ export async function hookGenerator(
 export function createHookFiles(host: Tree, options: NormalizedHookGeneratorSchema) {
   generateFiles(
     host,
-    join(__dirname, "files", options.hookType),
+    join(__dirname, "files"),
     options.relativePath,
     {
     ...options,

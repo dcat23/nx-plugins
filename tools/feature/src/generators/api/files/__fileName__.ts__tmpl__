@@ -1,0 +1,17 @@
+"use server"
+
+import axios, { handleError } from "@/lib/axios";
+
+type T = unknown;
+
+export async function <%= propertyName %>(body: unknown): Promise<T> {
+  const params: URLSearchParams = new URLSearchParams();
+  const url = `/api/<%= name %>?${params.toString()}`
+
+  try {
+    const { data } = await axios.get<T>(url);
+    return data;
+  } catch (error: any) {
+    return handleError(error)
+  }
+}

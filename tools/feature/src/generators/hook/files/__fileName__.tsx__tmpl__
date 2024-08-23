@@ -1,0 +1,31 @@
+<% if (hookType === "mutation") { %>
+import { useMutation } from "@tanstack/react-query";
+<% } else { %>
+import { useQuery } from "@tanstack/react-query";
+<% } %>
+type T = unknown;
+
+export function <%= propertyName %>()  {
+  <% if (hookType === "mutation") { %>
+  return useMutation<T>({
+    mutationFn: async () => {
+        return <%= propertyName.replace("use","").replace("-","") %>();
+    },
+
+    onSuccess: (data) => {
+      console.log("<%= propertyName %>", data);
+    },
+
+    onError: (error) => {
+      console.error("<%= propertyName %>", error);
+    },
+  });
+  <% } else { %>
+  return useQuery<T>({
+    queryKey: ["<%= name %>"],
+    queryFn: async () => {
+      return propertyName.replace("use","").replace("-","") %>();
+    },
+  });
+  <% } %>
+}

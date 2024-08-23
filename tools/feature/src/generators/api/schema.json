@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/schema",
+  "$id": "Api",
+  "title": "Create a react component to make api calls",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Name of the function",
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      },
+      "x-prompt": "What name would you like to use?"
+    },
+    "feature": {
+      "type": "string",
+      "description": "The package name to store the api component",
+      "$default": {
+        "$source": "argv",
+        "index": 1
+      }
+    },
+    "directory": {
+      "type": "string",
+      "description": "Where the api the component will be."
+    },
+    "skipExport": {
+      "type": "boolean",
+      "description": "Will skip adding export to index.ts"
+    },
+    "hook": {
+      "type": "boolean",
+      "description": "Will create the associated hook in the same directory"
+    }
+  },
+  "required": ["name"]
+}
