@@ -1,6 +1,6 @@
 # Feature
 
-Nx generators to create components, hooks and apis in a NextJs
+Nx generators to create [components](#components), [hooks](#hooks) and [apis](#api) in a NextJs
 application
 
 ## Installation
@@ -16,11 +16,11 @@ npx nx add @dcat23/nx-feature
 Create a react component
 
 ```
-npx nx generate @dcat23/nx-feature:component [name] [options,...]
+npx nx generate @dcat23/nx-feature:component [name] [feature?] [options,...]
 ```
 *or* 
 ```
-npx nx g component [name] [options,...]
+npx nx g component [name] [feature?] [options,...]
 ```
 
 Options
@@ -36,11 +36,11 @@ Options
 Create a react API
 
 ```
-npx nx generate @dcat23/nx-feature:api [name] [options,...]
+npx nx generate @dcat23/nx-feature:api [name] [feature?] [options,...]
 ```
 *or* 
 ```
-npx nx g api [name] [options,...]
+npx nx g api [name] [feature?] [options,...]
 ```
 
 Options
@@ -56,11 +56,11 @@ Options
 Create a react hook component
 
 ```
-npx nx generate @dcat23/nx-feature:hook [name] [options,...]
+npx nx generate @dcat23/nx-feature:hook [name] [feature?] [options,...]
 ```
 *or* 
 ```
-npx nx g hook [name] [options,...]
+npx nx g hook [name] [feature?] [options,...]
 ```
 
 Options

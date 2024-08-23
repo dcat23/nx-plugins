@@ -8,7 +8,6 @@ import {
 } from '@nx/devkit';
 import { Schema } from './schema';
 import { showPossibleWarnings } from '@nx/next/src/generators/application/lib/show-possible-warnings';
-import nextInitGenerator from '@nx/next/src/generators/init/init';
 import { addProject } from '@nx/next/src/generators/application/lib/add-project';
 import { addE2e } from '@nx/next/src/generators/application/lib/add-e2e';
 import { addJest } from '@nx/next/src/generators/application/lib/add-jest';
@@ -25,7 +24,8 @@ import { logShowProjectCommand } from '@nx/devkit/src/utils/log-show-project-com
 import { createApplicationFiles } from './lib/create-application-files';
 import { normalizeOptions } from './lib/normalize-options';
 import { addMuiDependencies } from './lib/utils';
-import { addRecommended } from './lib/addRecommended';
+import { addFeature } from './lib/add-feature';
+import nextInitGenerator from './lib/init-generator';
 
 export async function presetGenerator(
   host: Tree,
@@ -57,7 +57,7 @@ export async function presetGeneratorInternal(
   createApplicationFiles(host, options);
 
   addProject(host, options);
-  addRecommended(host, options);
+  addFeature(host, options);
 
   const e2eTask = await addE2e(host, options);
   tasks.push(e2eTask);

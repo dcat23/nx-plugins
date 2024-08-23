@@ -1,4 +1,6 @@
 export const nxVersion = require('../../package.json').version;
+export const featureVersion = require('@dcat23/nx-feature/package.json').version;
+export const latestVersion = 'latest';
 
 // Always pull the latest version until we merge rspack plugin into the repo.
 export const nxRspackVersion = '*';

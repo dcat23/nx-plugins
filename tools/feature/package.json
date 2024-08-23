@@ -8,5 +8,15 @@
   "type": "commonjs",
   "main": "./src/index.js",
   "typings": "./src/index.d.ts",
-  "generators": "./generators.json"
+  "generators": "./generators.json",
+  "author": "Devin Catuns",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:dcat23/nx-plugins.git",
+    "directory": "tools/feature"
+  },
+  "bugs": {
+    "url": "https://github.com/dcat23/nx-plugins/issues"
+  },
+  "homepage": "https://github.com/dcat23/nx-plugins/tree/main/tools/feature#readme"
 }

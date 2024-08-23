@@ -9,7 +9,7 @@ import {
 } from '@nx/devkit';
 import { addPluginV1 } from '@nx/devkit/src/utils/add-plugin';
 import { InitSchema } from '@nx/next/src/generators/init/schema';
-import { nxVersion, prismaVersion, reactDomVersion, reactVersion } from './versions';
+import { featureVersion, latestVersion, nxVersion, prismaVersion, reactDomVersion, reactVersion } from './versions';
 import { nextVersion } from '@nx/next/src/utils/versions';
 import { addGitIgnoreEntry } from '@nx/next/src/utils/add-gitignore-entry';
 
@@ -25,16 +25,17 @@ function updateDependencies(host: Tree, schema: InitSchema) {
         next: nextVersion,
         react: reactVersion,
         'react-dom': reactDomVersion,
-        'axios': 'latest',
-        '@next-auth/prisma-adapter': '^1.0.7',
+        'axios': latestVersion,
+        '@next-auth/prisma-adapter': latestVersion,
         '@prisma/client': prismaVersion,
-        'sonner': '^1.2.0',
-        '@tanstack/react-query': '^5.29.0',
-        'zod': '^3.22.4',
-        'zustand': '^4.5.2',
+        'sonner': latestVersion,
+        '@tanstack/react-query': latestVersion,
+        'zod': latestVersion,
+        'zustand': latestVersion,
       },
       {
         '@nx/next': nxVersion,
+        '@dcat23/nx-feature': featureVersion,
         'prisma': prismaVersion,
       },
       undefined,

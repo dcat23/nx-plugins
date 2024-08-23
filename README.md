@@ -26,7 +26,7 @@ Run `npx nx graph` to visually explore what got created. Now, let's get you up t
 
     ```bash
     cd tmp
-    rm -rf ./macc*
+    rm -rf ./frontend*
     npx nx g @dcat23/next-starter:preset macc-test-preset --directory tmp/frontend  
    ```
 
