@@ -14,6 +14,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@dcat23/next-starter": ["plugins/next-starter/src/index.ts"],
       "dcat23-nx": ["src/index.ts"]
     }
   },
