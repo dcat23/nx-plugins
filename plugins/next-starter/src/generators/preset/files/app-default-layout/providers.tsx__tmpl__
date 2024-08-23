@@ -2,7 +2,7 @@ import React, { ReactNode } from "react";
 import { SessionProvider } from "next-auth/react";
 import { Toaster } from "sonner";
 import ReactQueryProvider from "@/lib/providers/react-query-provider";
-<% if (componentLibrary === "mui") { %>
+<% if (ui === "mui") { %>
 import CssBaseline from '@mui/material/CssBaseline';
 import theme from './theme';
 <% } %>
@@ -15,16 +15,16 @@ const Providers = ({ children }: Props) => {
   return (
     <SessionProvider>
       <ReactQueryProvider>
-        <% if (componentLibrary === "mui") { %>
+        <% if (ui === "mui") { %>
         <AppRouterCacheProvider options={{ enableCssLayer: true }}>
           <ThemeProvider theme={theme}>
         <% } %>
           <Toaster position="bottom-right" />
-          <% if (componentLibrary === "mui") { %>
+          <% if (ui === "mui") { %>
           <CssBaseline />
           <% } %>
           {children}
-        <% if (componentLibrary === "mui") { %>
+        <% if (ui === "mui") { %>
           </ThemeProvider>
         </AppRouterCacheProvider>
         <% } %>

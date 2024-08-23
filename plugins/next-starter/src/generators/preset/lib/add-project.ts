@@ -11,12 +11,16 @@ export function addProject(host: Tree, options: NormalizedSchema): void {
   const nxJson = readNxJson(host);
   const hasPlugin = nxJson.plugins?.some((p) =>
     typeof p === 'string'
-      ? p === '@nx/next/plugin'
-      : p.plugin === '@nx/next/plugin'
+      ? p === '@dcat23/next-start'
+      : p.plugin === '@dcat23/next-start'
   );
 
   if (!hasPlugin) {
     addBuildTargetDefaults(host, '@dcat23/next-starter:build');
+
+    targets.dev = {
+      command: "next dev"
+    }
 
     targets.build = {
       executor: '@dcat23/next-starter:build',

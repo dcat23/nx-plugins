@@ -2,7 +2,7 @@ import { Schema as NxNextSchema } from '@nx/next/src/generators/application/sche
 
 
 export interface Schema extends NxNextSchema {
-  componentLibrary?: "mui" | "none";
+  ui?: "mui" | "none";
   database?: "postgres" | "mysql" | "none"
   authType?: "github" | "google"
 }

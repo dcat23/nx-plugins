@@ -31,11 +31,10 @@
         ]
       }
     },
-    "componentLibrary": {
+    "ui": {
       "description": "The UI component library to use",
       "type": "string",
       "default": "mui",
-      "alias": "ui",
       "x-prompt": {
         "message": "Which UI component library would you like to use?",
         "type": "list",
@@ -91,28 +90,8 @@
         "items": [
           { "value": "css", "label": "CSS" },
           {
-            "value": "scss",
-            "label": "SASS(.scss)       [ https://sass-lang.com                    ]"
-          },
-          {
-            "value": "less",
-            "label": "LESS              [ https://lesscss.org                      ]"
-          },
-          {
             "value": "tailwind",
             "label": "tailwind          [ https://tailwindcss.com/                 ]"
-          },
-          {
-            "value": "styled-components",
-            "label": "styled-components [ https://styled-components.com            ]"
-          },
-          {
-            "value": "@emotion/styled",
-            "label": "emotion           [ https://emotion.sh                       ]"
-          },
-          {
-            "value": "styled-jsx",
-            "label": "styled-jsx        [ https://www.npmjs.com/package/styled-jsx ]"
           },
           {
             "value": "none",
@@ -143,8 +122,7 @@
       "type": "string",
       "enum": ["playwright", "cypress", "none"],
       "description": "Test runner to use for end to end (E2E) tests.",
-      "x-prompt": "Which E2E test runner would you like to use?",
-      "default": "playwright"
+      "default": "none"
     },
     "tags": {
       "type": "string",
