@@ -25,7 +25,7 @@ import { createApplicationFiles } from './lib/create-application-files';
 import { normalizeOptions } from './lib/normalize-options';
 import { addMuiDependencies } from './lib/utils';
 import { addFeature } from './lib/add-feature';
-import nextInitGenerator from './lib/init-generator';
+import initGenerator from "../init/generator";
 
 export async function presetGenerator(
   host: Tree,
@@ -52,7 +52,7 @@ export async function presetGeneratorInternal(
 
   showPossibleWarnings(host, options);
 
-  const nextTask = await nextInitGenerator(host, {
+  const nextTask = await initGenerator(host, {
     ...options,
     skipFormat: true,
   });
