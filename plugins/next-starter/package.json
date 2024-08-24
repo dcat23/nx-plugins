@@ -1,6 +1,6 @@
 {
   "name": "@dcat23/next-starter",
-  "version": "0.0.1-dev2",
+  "version": "0.0.1",
   "dependencies": {
     "@nx/devkit": "19.6.2",
     "@nx/next": "19.6.2",

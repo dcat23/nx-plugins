@@ -28,7 +28,7 @@ services:
     ports:
       - "5050:80"
     networks:
-      - db
+      - postgres
     restart: unless-stopped
   <% } else if (database === "mysql") { %>
   mysql:
@@ -38,7 +38,6 @@ services:
       MYSQL_USER: ${DATABASE_USER}
       MYSQL_PASSWORD: ${DATABASE_PASSWORD}
       MYSQL_DATABASE: ${DATABASE_NAME}
-      PGDATA: /data/postgres
     volumes:
       - mysql:/var/lib/mysql
     ports:

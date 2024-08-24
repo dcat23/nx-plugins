@@ -62,7 +62,7 @@ export async function presetGeneratorInternal(
   createApplicationFiles(host, options);
 
   addProject(host, options);
-  addFeature(host, options);
+  // addFeature(host, options);
 
   const e2eTask = await addE2e(host, options);
   tasks.push(e2eTask);
@@ -81,11 +81,11 @@ export async function presetGeneratorInternal(
     tasks.push(tailwindTask);
   }
 
-  const styledTask = addStyleDependencies(host, {
-    style: options.style,
-    swc: !host.exists(joinPathFragments(options.appProjectRoot, '.babelrc')),
-  });
-  tasks.push(styledTask);
+  // const styledTask = addStyleDependencies(host, {
+  //   style: options.style,
+  //   swc: !host.exists(joinPathFragments(options.appProjectRoot, '.babelrc')),
+  // });
+  // tasks.push(styledTask);
 
   if (options.ui === "mui") {
     const muiTask = addMuiDependencies(host, options)
@@ -95,13 +95,6 @@ export async function presetGeneratorInternal(
   updateJestConfig(host, options);
   updateCypressTsConfig(host, options);
   setDefaults(host, options);
-
-  if (options.customServer) {
-    await customServerGenerator(host, {
-      project: options.projectName,
-      compiler: options.swc ? 'swc' : 'tsc',
-    });
-  }
 
   if (!options.skipPackageJson) {
     const devDependencies: Record<string, string> = {

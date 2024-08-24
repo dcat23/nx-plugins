@@ -71,6 +71,39 @@ npx nx g @nx/react:app demo
 npx nx g @nx/react:lib some-lib
 ```
 
+## Helpful commands
+
+Remove test packages
+
+   ```bash
+   rm -rf ./tmp/* 
+   ```
+
+Reset npx cache
+
+   ```bash
+   rm -rf ~/.npm/_npx
+   ```
+
+Remove node modules
+
+   ```bash
+   rm -rf node_modules
+   ```
+
+Reset pnpm store
+
+   ```bash
+   pnpm store prune
+   ```
+
+Add Yargs
+
+   ```bash
+   pnpm add -D @types/yargs yargs 
+   ```
+
+
 ## Finish your CI setup
 
 [Click here to finish setting up your workspace!](https://cloud.nx.app/connect/xGeP1adQJY)

@@ -9,6 +9,14 @@ export async function hookGenerator(
   tree: Tree,
   options: HookGeneratorSchema
 ) {
+  return hookGeneratorInternal(tree, {
+    ...options,
+  });
+}
+export async function hookGeneratorInternal(
+  tree: Tree,
+  options: HookGeneratorSchema
+) {
 
   const normalizedOptions = await normalizeOptions(
     tree,
