@@ -23,6 +23,9 @@ importers:
       '@nx/devkit':
         specifier: 19.6.2
         version: 19.6.2(nx@19.6.2(@swc-node/register@1.9.2(@swc/core@1.5.29(@swc/helpers@0.5.12))(@swc/types@0.1.12)(typescript@5.5.4))(@swc/core@1.5.29(@swc/helpers@0.5.12)))
+      create-nx-workspace:
+        specifier: 19.6.2
+        version: 19.6.2
       next:
         specifier: 14.2.3
         version: 14.2.3(@babel/core@7.25.2)(@playwright/test@1.46.1)(babel-plugin-macros@3.1.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.77.8)
@@ -93,6 +96,9 @@ importers:
       '@types/react-dom':
         specifier: 18.3.0
         version: 18.3.0
+      '@types/yargs':
+        specifier: ^17.0.33
+        version: 17.0.33
       '@typescript-eslint/eslint-plugin':
         specifier: ^7.16.0
         version: 7.18.0(@typescript-eslint/parser@7.18.0(eslint@8.57.0)(typescript@5.5.4))(eslint@8.57.0)(typescript@5.5.4)
@@ -150,6 +156,9 @@ importers:
       verdaccio:
         specifier: ^5.0.4
         version: 5.32.1(typanion@3.14.0)
+      yargs:
+        specifier: ^17.7.2
+        version: 17.7.2
 
 packages:
 
@@ -2990,6 +2999,10 @@ packages:
   create-jest@29.7.0:
     resolution: {integrity: sha512-Adz2bdH0Vq3F53KEMJOoftQFutWCukm6J24wbPWRO4k1kMY7gS7ds/uoJkNuV8wDCtWWnuwGcJwpWcih+zEW1Q==}
     engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
+    hasBin: true
+
+  create-nx-workspace@19.6.2:
+    resolution: {integrity: sha512-J1B15DiI7Mk6lcHf+Itj7Tc7OmilDan78GZb6i8G85OX6tejDnDPIENYs/wKgZfT16g0QNmtwCi3bB5wuRBOOA==}
     hasBin: true
 
   create-require@1.1.1:
@@ -11093,6 +11106,19 @@ snapshots:
       - babel-plugin-macros
       - supports-color
       - ts-node
+
+  create-nx-workspace@19.6.2:
+    dependencies:
+      axios: 1.7.4
+      chalk: 4.1.2
+      enquirer: 2.3.6
+      flat: 5.0.2
+      ora: 5.3.0
+      tmp: 0.2.3
+      tslib: 2.6.3
+      yargs: 17.7.2
+    transitivePeerDependencies:
+      - debug
 
   create-require@1.1.1: {}
 
