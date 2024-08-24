@@ -5,18 +5,18 @@ import {
   readNxJson,
   removeDependenciesFromPackageJson,
   runTasksInSerial,
-  type Tree
+  type Tree,
 } from '@nx/devkit';
 import { addPluginV1 } from '@nx/devkit/src/utils/add-plugin';
 import { InitSchema } from './schema';
 import { reactDomVersion, reactVersion } from '@nx/react/src/utils/versions';
-import {latestVersion, nextVersion, nxVersion} from '../../utils/verions';
+import { featureVersion, latestVersion, nextVersion, nxVersion, nextStarterVersion } from '../../utils/verions';
 import { addGitIgnoreEntry } from '@nx/next/src/utils/add-gitignore-entry';
 
 function updateDependencies(host: Tree, schema: InitSchema) {
   const tasks: GeneratorCallback[] = [];
 
-  tasks.push(removeDependenciesFromPackageJson(host, ['@nx/next'], []));
+  tasks.push(removeDependenciesFromPackageJson(host, ['@dcat23/next-starter'], []));
 
   tasks.push(
     addDependenciesToPackageJson(
@@ -32,8 +32,9 @@ function updateDependencies(host: Tree, schema: InitSchema) {
         'zustand': latestVersion,
       },
       {
+        '@dcat23/next-starter': nextStarterVersion,
+        '@dcat23/nx-feature': featureVersion,
         '@nx/next': nxVersion,
-        '@dcat23/nx-feature': latestVersion,
       },
       undefined,
       schema.keepExistingVersions
@@ -58,24 +59,24 @@ export async function initGeneratorInternal(
 
   schema.addPlugin ??= addPluginDefault;
   if (schema.addPlugin) {
-    // const { createNodes } = await import('@nx/next/src/plugins/plugin');
-    // await addPluginV1(
-    //   host,
-    //   await createProjectGraphAsync(),
-    //   '@nx/next/plugin',
-    //   createNodes,
-    //   {
-    //     startTargetName: ['start', 'next:start', 'next-start'],
-    //     buildTargetName: ['build', 'next:build', 'next-build'],
-    //     devTargetName: ['dev', 'next:dev', 'next-dev'],
-    //     serveStaticTargetName: [
-    //       'serve-static',
-    //       'next:serve-static',
-    //       'next-serve-static',
-    //     ],
-    //   },
-    //   schema.updatePackageScripts
-    // );
+    const { createNodes } = await import('@dcat23/next-starter');
+    await addPluginV1(
+      host,
+      await createProjectGraphAsync(),
+      '@dcat23/next-starter',
+      createNodes,
+      {
+        startTargetName: ['start', 'next:start', 'next-start'],
+        buildTargetName: ['build', 'next:build', 'next-build'],
+        devTargetName: ['dev', 'next:dev', 'next-dev'],
+        serveStaticTargetName: [
+          'serve-static',
+          'next:serve-static',
+          'next-serve-static',
+        ],
+      },
+      schema.updatePackageScripts
+    );
   }
 
   addGitIgnoreEntry(host);

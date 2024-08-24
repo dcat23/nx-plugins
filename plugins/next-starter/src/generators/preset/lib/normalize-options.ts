@@ -1,9 +1,9 @@
 import { NormalizedSchema, Schema } from '../schema';
 import { joinPathFragments, names, readNxJson, Tree } from '@nx/devkit';
 import { determineProjectNameAndRootOptions } from '@nx/devkit/src/generators/project-name-and-root-utils';
-import { NextPluginOptions } from '@nx/next/plugin';
 import { assertValidStyle } from '@nx/react';
 import { Linter } from '@nx/eslint';
+import { NextStarterPluginOptions } from "@dcat23/next-starter";
 
 export async function normalizeOptions(
   host: Tree,
@@ -19,7 +19,7 @@ export async function normalizeOptions(
     directory: options.directory,
     projectNameAndRootFormat: options.projectNameAndRootFormat,
     rootProject: options.rootProject,
-    callingGenerator: '@nx/next:application',
+    callingGenerator: '@dcat23/next-starter:preset',
   });
   options.rootProject = appProjectRoot === '.';
   options.projectNameAndRootFormat = projectNameAndRootFormat;
@@ -37,10 +37,10 @@ export async function normalizeOptions(
       for (const plugin of nxJson.plugins) {
         if (
           typeof plugin === 'object' &&
-          plugin.plugin === '@nx/next/plugin' &&
-          (plugin.options as NextPluginOptions).startTargetName
+          plugin.plugin === '@dcat23/next-starter' &&
+          (plugin.options as NextStarterPluginOptions).startTargetName
         ) {
-          e2eWebServerTarget = (plugin.options as NextPluginOptions)
+          e2eWebServerTarget = (plugin.options as NextStarterPluginOptions)
             .startTargetName;
         }
       }
@@ -105,5 +105,8 @@ export async function normalizeOptions(
     style: options.style || 'css',
     styledModule,
     unitTestRunner: options.unitTestRunner || 'jest',
+    authType: options.authType || "github",
+    database: options.database || 'postgres',
+    ui: options.ui || 'mui',
   };
 }

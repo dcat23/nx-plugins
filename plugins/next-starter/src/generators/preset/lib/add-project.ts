@@ -1,6 +1,6 @@
-import {addProjectConfiguration, ProjectConfiguration, readNxJson, Tree} from "@nx/devkit";
-import {NormalizedSchema} from "../schema";
-import {addBuildTargetDefaults} from "@nx/devkit/src/generators/target-defaults-utils";
+import { addProjectConfiguration, ProjectConfiguration, readNxJson, Tree } from "@nx/devkit";
+import { NormalizedSchema } from "../schema";
+import { addBuildTargetDefaults } from "@nx/devkit/src/generators/target-defaults-utils";
 
 export function addProject(host: Tree, options: NormalizedSchema): void {
   const targets: Record<string, any> = {};
@@ -11,8 +11,8 @@ export function addProject(host: Tree, options: NormalizedSchema): void {
   const nxJson = readNxJson(host);
   const hasPlugin = nxJson.plugins?.some((p) =>
     typeof p === 'string'
-      ? p === '@dcat23/next-start'
-      : p.plugin === '@dcat23/next-start'
+      ? p === '@dcat23/next-starter'
+      : p.plugin === '@dcat23/next-starter'
   );
 
   if (!hasPlugin) {

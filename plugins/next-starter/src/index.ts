@@ -18,7 +18,7 @@ import { calculateHashForCreateNodes } from '@nx/devkit/src/utils/calculate-hash
 import { getLockFileName } from '@nx/js';
 import { loadConfigFile } from '@nx/devkit/src/utils/config-utils';
 
-export interface NextPluginOptions {
+export interface NextStarterPluginOptions {
   buildTargetName?: string;
   devTargetName?: string;
   startTargetName?: string;
@@ -48,7 +48,7 @@ export const createDependencies: CreateDependencies = () => {
   return [];
 };
 
-export const createNodes: CreateNodes<NextPluginOptions> = [
+export const createNodes: CreateNodes<NextStarterPluginOptions> = [
   '**/next.config.{js,cjs,mjs}',
   async (configFilePath, options, context) => {
     const projectRoot = dirname(configFilePath);
@@ -91,7 +91,7 @@ export const createNodes: CreateNodes<NextPluginOptions> = [
 async function buildNextTargets(
   nextConfigPath: string,
   projectRoot: string,
-  options: NextPluginOptions,
+  options: NextStarterPluginOptions,
   context: CreateNodesContext
 ) {
   const nextConfig = await getNextConfig(nextConfigPath, context);
@@ -150,7 +150,7 @@ function getDevTargetConfig(projectRoot: string) {
   return targetConfig;
 }
 
-function getStartTargetConfig(options: NextPluginOptions, projectRoot: string) {
+function getStartTargetConfig(options: NextStarterPluginOptions, projectRoot: string) {
   const targetConfig: TargetConfiguration = {
     command: `next start`,
     options: {
@@ -162,7 +162,7 @@ function getStartTargetConfig(options: NextPluginOptions, projectRoot: string) {
   return targetConfig;
 }
 
-function getStaticServeTargetConfig(options: NextPluginOptions) {
+function getStaticServeTargetConfig(options: NextStarterPluginOptions) {
   const targetConfig: TargetConfiguration = {
     executor: '@nx/web:file-server',
     options: {
@@ -210,7 +210,7 @@ function getNextConfig(
   return loadConfigFile(resolvedPath);
 }
 
-function normalizeOptions(options: NextPluginOptions): NextPluginOptions {
+function normalizeOptions(options: NextStarterPluginOptions): NextStarterPluginOptions {
   options ??= {};
   options.buildTargetName ??= 'build';
   options.devTargetName ??= 'dev';

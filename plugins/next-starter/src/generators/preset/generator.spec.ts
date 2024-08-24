@@ -1,7 +1,7 @@
-import {createTreeWithEmptyWorkspace} from '@nx/devkit/testing';
-import {readJson, Tree,} from '@nx/devkit';
-import {presetGenerator} from './generator';
-import {join} from 'path';
+import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
+import { readJson, Tree } from '@nx/devkit';
+import { presetGenerator } from './generator';
+import { join } from 'path';
 
 describe('app', () => {
   let tree: Tree;
@@ -29,12 +29,13 @@ describe('app', () => {
         `../dist/${name}/.next/types/**/*.ts`,
         'next-env.d.ts',
       ]);
-      expect(tree.exists(`${name}/src/pages/styles.css`)).toBeFalsy();
-      expect(tree.exists(`${name}/src/app/global.css`)).toBeTruthy();
+
       expect(tree.exists(`${name}/src/app/page.tsx`)).toBeTruthy();
-      expect(tree.exists(`${name}/src/app/layout.tsx`)).toBeTruthy();
-      expect(tree.exists(`${name}/src/app/api/hello/route.ts`)).toBeTruthy();
-      expect(tree.exists(`${name}/src/app/page.module.css`)).toBeTruthy();
+      expect(tree.exists(`${name}/src/app/providers.tsx`)).toBeTruthy();
+      expect(tree.exists(`${name}/src/app/api/auth/[...nextauth]/route.ts`)).toBeTruthy();
+      expect(tree.exists(`${name}/src/lib/auth/index.ts`)).toBeTruthy();
+      expect(tree.exists(`${name}/src/lib/axios.ts`)).toBeTruthy();
+      expect(tree.exists(`${name}/src/lib/config.ts`)).toBeTruthy();
       expect(tree.exists(`${name}/public/favicon.ico`)).toBeTruthy();
     });
 
@@ -58,6 +59,14 @@ describe('app', () => {
         `dist/${name}/.next/types/**/*.ts`,
         'next-env.d.ts',
       ]);
+
+      expect(tree.exists(`src/app/page.tsx`)).toBeTruthy();
+      expect(tree.exists(`src/app/providers.tsx`)).toBeTruthy();
+      expect(tree.exists(`src/app/api/auth/[...nextauth]/route.ts`)).toBeTruthy();
+      expect(tree.exists(`src/lib/auth/index.ts`)).toBeTruthy();
+      expect(tree.exists(`src/lib/axios.ts`)).toBeTruthy();
+      expect(tree.exists(`src/lib/config.ts`)).toBeTruthy();
+      expect(tree.exists(`public/favicon.ico`)).toBeTruthy();
     });
 
     it('should generate an unstyled component page', async () => {

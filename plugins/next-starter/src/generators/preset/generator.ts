@@ -1,45 +1,31 @@
-import {
-  addDependenciesToPackageJson,
-  formatFiles,
-  GeneratorCallback,
-  joinPathFragments,
-  runTasksInSerial,
-  Tree
-} from '@nx/devkit';
-import {Schema} from './schema';
-import {showPossibleWarnings} from '@nx/next/src/generators/application/lib/show-possible-warnings';
-import {addE2e} from '@nx/next/src/generators/application/lib/add-e2e';
-import {addJest} from '@nx/next/src/generators/application/lib/add-jest';
-import {setupTailwindGenerator} from '@nx/react';
-import {addStyleDependencies} from '@nx/next/src/utils/styles';
-import {updateJestConfig} from '@nx/next/src/generators/application/lib/update-jest-config';
-import {updateCypressTsConfig} from '@nx/next/src/generators/application/lib/update-cypress-tsconfig';
-import {customServerGenerator} from '@nx/next/src/generators/custom-server/custom-server';
-import {testingLibraryReactVersion, typesReactDomVersion, typesReactVersion} from '@nx/react/src/utils/versions';
-import {addLinting} from '@nx/next/src/generators/application/lib/add-linting';
-import {tsLibVersion} from '@nx/next/src/utils/versions';
-import {logShowProjectCommand} from '@nx/devkit/src/utils/log-show-project-command';
-import {createApplicationFiles} from './lib/create-application-files';
-import {normalizeOptions} from './lib/normalize-options';
-import {addMuiDependencies} from './lib/utils';
+import { addDependenciesToPackageJson, formatFiles, GeneratorCallback, runTasksInSerial, Tree } from '@nx/devkit';
+import { Schema } from './schema';
+import { showPossibleWarnings } from '@nx/next/src/generators/application/lib/show-possible-warnings';
+import { addE2e } from '@nx/next/src/generators/application/lib/add-e2e';
+import { addJest } from '@nx/next/src/generators/application/lib/add-jest';
+import { setupTailwindGenerator } from '@nx/react';
+import { updateJestConfig } from '@nx/next/src/generators/application/lib/update-jest-config';
+import { updateCypressTsConfig } from '@nx/next/src/generators/application/lib/update-cypress-tsconfig';
+import { testingLibraryReactVersion, typesReactDomVersion, typesReactVersion } from '@nx/react/src/utils/versions';
+import { addLinting } from '@nx/next/src/generators/application/lib/add-linting';
+import { tsLibVersion } from '@nx/next/src/utils/versions';
+import { logShowProjectCommand } from '@nx/devkit/src/utils/log-show-project-command';
+import { createApplicationFiles } from './lib/create-application-files';
+import { normalizeOptions } from './lib/normalize-options';
+import { addMuiDependencies } from './lib/utils';
 import initGenerator from "../init/generator";
-import {addProject} from "./lib/add-project";
-import {addFeature} from "./lib/add-feature";
-import {setDefaults} from "./lib/set-defaults";
+import { addProject } from "./lib/add-project";
+import { setDefaults } from "./lib/set-defaults";
 
 export async function presetGenerator(
   host: Tree,
   schema: Schema
 ) {
   return presetGeneratorInternal(host, {
-    addPlugin: true,
-    authType: "github",
-    ui: "mui",
-    database: "postgres",
-    projectNameAndRootFormat: 'derived',
+    addPlugin: false,
     rootProject: false,
+    projectNameAndRootFormat: 'derived',
     ...schema,
-    js: false
   })
 }
 
