@@ -1,5 +1,6 @@
 import { addDependenciesToPackageJson, formatFiles, GeneratorCallback, runTasksInSerial, Tree } from '@nx/devkit';
 import { Schema } from './schema';
+import { initGenerator as jsInitGenerator } from '@nx/js';
 import { showPossibleWarnings } from '@nx/next/src/generators/application/lib/show-possible-warnings';
 import { addE2e } from '@nx/next/src/generators/application/lib/add-e2e';
 import { addJest } from '@nx/next/src/generators/application/lib/add-jest';
@@ -39,6 +40,13 @@ export async function presetGeneratorInternal(
 
   showPossibleWarnings(host, options);
 
+  const jsInitTask = await jsInitGenerator(host, {
+    js: options.js,
+    skipPackageJson: options.skipPackageJson,
+    skipFormat: true,
+  });
+  tasks.push(jsInitTask);
+
   const initTask = await initGenerator(host, {
     ...options,
     skipFormat: true,
@@ -73,8 +81,13 @@ export async function presetGeneratorInternal(
   // });
   // tasks.push(styledTask);
 
+  // todo: mimic addStyleDependencies with ui
+    // const uiTask = addUiDependencies(host, options)
+    // tasks.push(uiTask)
   if (options.ui === "mui") {
+    // const uiTask = addUiDependencies(host, options)
     const muiTask = addMuiDependencies(host, options)
+
     tasks.push(muiTask)
   }
 

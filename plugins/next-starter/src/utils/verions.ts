@@ -1,5 +1,5 @@
 export const nextStarterVersion = require('../../package.json').version;
-export const featureVersion = require('../../../../tools/feature/package.json').version;
+export const featureVersion = 'latest';
 
 export const nxVersion = '19.6.2';
 export const nextVersion = '14.2.3';

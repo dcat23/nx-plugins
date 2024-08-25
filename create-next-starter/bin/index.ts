@@ -1,26 +1,24 @@
 #!/usr/bin/env node
 
 import { createWorkspace } from 'create-nx-workspace';
+import { getCreateWorkspaceOptions } from "./workspace-options";
 
 async function main() {
-  const name = process.argv[2]; // TODO: use libraries like yargs or enquirer to set your workspace name
-  if (!name) {
-    throw new Error('Please provide a name for the workspace');
-  }
+  const options = await getCreateWorkspaceOptions(process.argv.slice(2))
 
-  console.log(`Creating the workspace: ${name}`);
+  console.log(`Creating the workspace: ${options.name}`);
 
   // This assumes "@dcat23/next-starter" and "create-next-starter" are at the same version
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const presetVersion = require('../package.json').version;
 
-  // TODO: update below to customize the workspace
   const { directory } = await createWorkspace(
     `@dcat23/next-starter@${presetVersion}`,
     {
-      name,
-      nxCloud: 'github',
+      ...options,
+      name: options.name,
       packageManager: 'pnpm',
+      nxCloud: 'github',
     }
   );
 
