@@ -3,6 +3,8 @@ import { SessionProvider } from "next-auth/react";
 import { Toaster } from "sonner";
 import ReactQueryProvider from "@/lib/providers/react-query-provider";
 <% if (ui === "mui") { %>
+import { AppRouterCacheProvider } from '@mui/material-nextjs/v14-appRouter';
+import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import theme from './theme';
 <% } %>
@@ -19,10 +21,10 @@ const Providers = ({ children }: Props) => {
         <AppRouterCacheProvider options={{ enableCssLayer: true }}>
           <ThemeProvider theme={theme}>
         <% } %>
-          <Toaster position="bottom-right" />
           <% if (ui === "mui") { %>
           <CssBaseline />
           <% } %>
+          <Toaster position="bottom-right" />
           {children}
         <% if (ui === "mui") { %>
           </ThemeProvider>

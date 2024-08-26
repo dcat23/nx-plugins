@@ -2,7 +2,8 @@ export const nextStarterVersion = require('../../package.json').version;
 export const featureVersion = 'latest';
 
 export const nxVersion = '19.6.2';
-export const nextVersion = '14.2.3';
+export const nextVersion = '14.2.6';
+export const nextAuthVersion = '5.0.0-beta.20';
 export const eslintConfigNextVersion = '14.2.3';
 export const sassVersion = '1.62.1';
 export const lessLoader = '11.1.0';

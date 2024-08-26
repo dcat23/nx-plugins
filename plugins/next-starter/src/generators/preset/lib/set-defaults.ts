@@ -5,10 +5,10 @@ export function setDefaults(host: Tree, options: NormalizedSchema) {
   const nxJson = readNxJson(host);
 
   nxJson.generators ??= {};
-  nxJson.generators['@dcat23/next-start'] ??= {};
-  nxJson.generators['@dcat23/next-start'].application ??= {};
-  nxJson.generators['@dcat23/next-start'].application.style ??= options.style;
-  nxJson.generators['@dcat23/next-start'].application.linter ??= options.linter;
+  nxJson.generators['@dcat23/next-starter'] ??= {};
+  nxJson.generators['@dcat23/next-starter'].preset ??= {};
+  nxJson.generators['@dcat23/next-starter'].preset.style ??= options.style;
+  nxJson.generators['@dcat23/next-starter'].preset.linter ??= options.linter;
 
   updateNxJson(host, nxJson);
 }

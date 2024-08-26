@@ -19,7 +19,7 @@ export function addProject(host: Tree, options: NormalizedSchema): void {
     addBuildTargetDefaults(host, '@dcat23/next-starter:build');
 
     targets.dev = {
-      command: "next dev"
+      command: 'prisma generate & next dev'
     }
 
     targets.build = {

@@ -13,7 +13,7 @@ import { tsLibVersion } from '@nx/next/src/utils/versions';
 import { logShowProjectCommand } from '@nx/devkit/src/utils/log-show-project-command';
 import { createApplicationFiles } from './lib/create-application-files';
 import { normalizeOptions } from './lib/normalize-options';
-import { addMuiDependencies } from './lib/utils';
+import { addUiDependencies } from './lib/utils';
 import initGenerator from "../init/generator";
 import { addProject } from "./lib/add-project";
 import { setDefaults } from "./lib/set-defaults";
@@ -75,18 +75,12 @@ export async function presetGeneratorInternal(
     tasks.push(tailwindTask);
   }
 
-  // const styledTask = addStyleDependencies(host, {
-  //   style: options.style,
-  //   swc: !host.exists(joinPathFragments(options.appProjectRoot, '.babelrc')),
-  // });
-  // tasks.push(styledTask);
-
   // todo: mimic addStyleDependencies with ui
     // const uiTask = addUiDependencies(host, options)
     // tasks.push(uiTask)
-  if (options.ui === "mui") {
+  if (options.ui !== "none") {
     // const uiTask = addUiDependencies(host, options)
-    const muiTask = addMuiDependencies(host, options)
+    const muiTask = addUiDependencies(host, options)
 
     tasks.push(muiTask)
   }

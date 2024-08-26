@@ -1,23 +1,31 @@
 import { addDependenciesToPackageJson, GeneratorCallback, Tree } from '@nx/devkit';
-import { NormalizedSchema } from '../schema';
+import { NormalizedSchema, UiLibrary } from '../schema';
+import { latestVersion } from "../../../utils/verions";
 
-export function addMuiDependencies(host: Tree, options: NormalizedSchema): GeneratorCallback {
-  const dependencies = {
-    '@mui/material': 'latest',
-    '@mui/icons-material': 'latest',
+export const uiDependencies: Record<
+  UiLibrary,
+  {dependencies: Record<string,string>, devDependencies: Record<string,string>}
+> = {
+  'mui': {
+    dependencies: {
+      '@mui/material': latestVersion,
+      '@mui/material-nextjs': latestVersion,
+      '@mui/icons-material': latestVersion,
+      '@emotion/react': latestVersion,
+      '@emotion/styled': latestVersion,
+    },
+    devDependencies: {}
+  },
+  'none': {
+    dependencies: {},
+    devDependencies: {}
   }
-  const devDependencies = {}
+}
 
-  if (options.style === "styled-components") {
-    dependencies['@mui/styled-engine-sc'] = 'latest'
-    dependencies['styled-components'] = 'latest'
-  } else {
-    dependencies['@emotion/react'] = 'latest'
-    dependencies['@emotion/styled'] = 'latest'
-  }
+export function addUiDependencies(host: Tree, options: NormalizedSchema): GeneratorCallback {
   return addDependenciesToPackageJson(
     host,
-    dependencies,
-    devDependencies,
+    uiDependencies[options.ui].dependencies,
+    uiDependencies[options.ui].devDependencies,
   )
 }
