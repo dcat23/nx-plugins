@@ -1,5 +1,5 @@
 import { join } from 'path';
-import { joinPathFragments, names, Tree } from '@nx/devkit';
+import { joinPathFragments, names, readProjectConfiguration, Tree } from '@nx/devkit';
 import { FeatureSchema, Normalized } from './feature';
 import { determineArtifactNameAndDirectoryOptions } from '@nx/devkit/src/generators/artifact-name-and-directory-utils';
 
@@ -24,6 +24,7 @@ export async function normalizeOptions<
   nameMutator = names
 ): Promise<Normalized<Schema>> {
 
+  const useSrc = !options.directory
   const {
     artifactName: name,
     directory,
@@ -40,9 +41,13 @@ export async function normalizeOptions<
       nameAndDirectoryFormat: "as-provided",
     });
 
+  const { sourceRoot } = readProjectConfiguration(tree, projectName);
+
   const { name: artifactName, fileName, propertyName, className, constantName } = nameMutator(name)
-  const filePath = join(packageName, fileName);
-  const relativePath = join(directory, packageName);
+  const filePath = joinPathFragments(packageName, fileName);
+  const indexPath = joinPathFragments(useSrc ? sourceRoot : "", directory);
+  const relativePath = joinPathFragments(indexPath, packageName);
+
   return {
     ...options,
     name,
@@ -53,6 +58,7 @@ export async function normalizeOptions<
     propertyName,
     directory,
     filePath,
+    indexPath,
     relativePath,
     projectName,
   };
@@ -64,7 +70,7 @@ export function addToIndex(host: Tree, opts: Normalized<FeatureSchema>) {
   if (opts.skipExport) return;
 
   const indexFile = joinPathFragments(
-    opts.directory,
+    opts.indexPath,
     "index.ts"
   )
 

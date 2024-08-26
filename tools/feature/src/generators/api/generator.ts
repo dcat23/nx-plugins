@@ -15,6 +15,7 @@ export async function apiGenerator(
     options,
   )
 
+  console.log(opts)
   createApiFiles(tree, opts);
   addToIndex(tree, opts);
 

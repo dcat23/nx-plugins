@@ -13,6 +13,7 @@ export interface NormalizedFeature {
   fileName: string;
   propertyName: string;
   filePath: string;
+  indexPath: string;
   relativePath: string;
   projectName: string;
 }

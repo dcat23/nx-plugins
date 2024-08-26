@@ -75,4 +75,4 @@ export function addProject(host: Tree, options: NormalizedSchema): void {
   addProjectConfiguration(host, options.projectName, {
     ...project,
   });
-};
+}
