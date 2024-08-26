@@ -1,17 +1,20 @@
 import {
   generateFiles,
-  joinPathFragments, names,
-  offsetFromRoot as _offsetFromRoot, readJson, toJS,
-  Tree, updateJson
+  joinPathFragments,
+  names,
+  offsetFromRoot as _offsetFromRoot,
+  readJson,
+  toJS,
+  Tree,
+  updateJson,
 } from '@nx/devkit';
 import { NormalizedSchema } from '../schema';
 import { getRelativePathToRootTsConfig } from '@nx/js';
 import {
   createAppJsx,
-  createStyleRules
+  createStyleRules,
 } from '@nx/next/src/generators/application/lib/create-application-files.helpers';
 import { join } from 'path';
-import { createDockerDbContent } from './create-application-files-helpers';
 
 export function createApplicationFiles(host: Tree, options: NormalizedSchema): void {
   const offsetFromRoot = _offsetFromRoot(options.appProjectRoot);
@@ -53,7 +56,6 @@ export function createApplicationFiles(host: Tree, options: NormalizedSchema): v
 
     stylesExt: options.style === 'less' ? options.style : 'css',
 
-    dockerDbContent: createDockerDbContent(options),
   };
 
   const generatedAppFilePath = options.src

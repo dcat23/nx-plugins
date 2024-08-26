@@ -13,7 +13,7 @@ import { tsLibVersion } from '@nx/next/src/utils/versions';
 import { logShowProjectCommand } from '@nx/devkit/src/utils/log-show-project-command';
 import { createApplicationFiles } from './lib/create-application-files';
 import { normalizeOptions } from './lib/normalize-options';
-import { addUiDependencies } from './lib/utils';
+import { addUiDependencies } from './lib/add-ui-dependencies';
 import initGenerator from "../init/generator";
 import { addProject } from "./lib/add-project";
 import { setDefaults } from "./lib/set-defaults";

@@ -1,8 +1,8 @@
 import { Schema as NxNextSchema } from '@nx/next/src/generators/application/schema';
 
-export type UiLibrary = "mui" | "none"; 
-export type Database = "postgres" | "mysql" | "none"; 
-export type AuthType = "github" | "google"; 
+export type UiLibrary = "mui" | "radix" | "none";
+export type Database = "postgres" | "mysql" | "none";
+export type AuthType = "github" | "google";
 
 export interface Schema extends NxNextSchema {
   ui?: UiLibrary;

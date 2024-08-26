@@ -7,6 +7,8 @@ import { AppRouterCacheProvider } from '@mui/material-nextjs/v14-appRouter';
 import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import theme from './theme';
+<% } else if (ui === 'radix'){ %>
+import { Theme } from '@radix-ui/themes';
 <% } %>
 
 interface Props {
@@ -20,6 +22,8 @@ const Providers = ({ children }: Props) => {
         <% if (ui === "mui") { %>
         <AppRouterCacheProvider options={{ enableCssLayer: true }}>
           <ThemeProvider theme={theme}>
+        <% } else if (ui === 'radix') { %>
+            <Theme>
         <% } %>
           <% if (ui === "mui") { %>
           <CssBaseline />
@@ -29,6 +33,8 @@ const Providers = ({ children }: Props) => {
         <% if (ui === "mui") { %>
           </ThemeProvider>
         </AppRouterCacheProvider>
+        <% } else if (ui === 'radix'){ %>
+        </Theme>
         <% } %>
       </ReactQueryProvider>
     </SessionProvider>
