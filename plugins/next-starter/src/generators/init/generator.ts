@@ -23,6 +23,7 @@ function updateDependencies(host: Tree, schema: InitSchema) {
       host,
       {
         '@auth/prisma-adapter': latestVersion,
+        '@prisma/client': latestVersion,
         '@tanstack/react-query': latestVersion,
         'next': nextVersion,
         'react': reactVersion,
