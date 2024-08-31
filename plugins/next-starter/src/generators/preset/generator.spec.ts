@@ -124,31 +124,38 @@ describe('app', () => {
     `);
   });
 
-  describe('--unit-test-runner none', () => {
-    it('should not generate test configuration', async () => {
+  describe('--ui mui', () => {
+    it('should add Material-ui to package.json', async () => {
       const name = uniq();
       await presetGenerator(tree, {
         name,
         style: 'css',
-        unitTestRunner: 'none',
+        ui: 'mui',
         projectNameAndRootFormat: 'as-provided',
       });
-      expect(tree.exists('jest.config.ts')).toBeFalsy();
-      expect(tree.exists(`${name}/specs/index.spec.tsx`)).toBeFalsy();
+      const packageJson = readJson(tree, `package.json`);
+      expect(packageJson.dependencies['@mui/material']).toBeTruthy();
+      expect(packageJson.dependencies['@mui/icons-material']).toBeTruthy();
+      expect(packageJson.dependencies['@mui/material-nextjs']).toBeTruthy();
+      expect(packageJson.dependencies['@emotion/react']).toBeTruthy();
+      expect(packageJson.dependencies['@emotion/styled']).toBeTruthy();
     });
   });
 
-  describe('--e2e-test-runner none', () => {
-    it('should not generate test configuration', async () => {
+  describe('--ui radix', () => {
+    it('should add radix-ui to package.json', async () => {
       const name = uniq();
-
       await presetGenerator(tree, {
         name,
         style: 'css',
-        e2eTestRunner: 'none',
+        ui: 'radix',
         projectNameAndRootFormat: 'as-provided',
       });
-      expect(tree.exists(`${name}-e2e`)).toBeFalsy();
+      const packageJson = readJson(tree, `package.json`);
+      expect(packageJson.dependencies['@radix-ui/themes']).toBeTruthy();
+      expect(packageJson.dependencies['@radix-ui/react-icons']).toBeTruthy();
+      const layoutTsx = tree.read(`${name}/src/app/providers.tsx`);
+      expect(layoutTsx.includes("import { Theme } from '@radix-ui/themes'")).toBeTruthy();
     });
   });
 

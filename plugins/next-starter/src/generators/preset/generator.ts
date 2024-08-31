@@ -75,14 +75,9 @@ export async function presetGeneratorInternal(
     tasks.push(tailwindTask);
   }
 
-  // todo: mimic addStyleDependencies with ui
-    // const uiTask = addUiDependencies(host, options)
-    // tasks.push(uiTask)
   if (options.ui !== "none") {
-    // const uiTask = addUiDependencies(host, options)
-    const muiTask = addUiDependencies(host, options)
-
-    tasks.push(muiTask)
+    const uiTask = addUiDependencies(host, options)
+    tasks.push(uiTask)
   }
 
   updateJestConfig(host, options);
@@ -116,6 +111,7 @@ export async function presetGeneratorInternal(
     logShowProjectCommand(options.projectName);
   });
 
+  console.log("run tasks in serial")
   return runTasksInSerial(...tasks);
 }
 

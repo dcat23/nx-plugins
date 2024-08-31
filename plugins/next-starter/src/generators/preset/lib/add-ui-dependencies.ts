@@ -18,9 +18,9 @@ export const uiDependencies: Record<
   },
   'radix': {
     dependencies: {
-      'radix-ui/themes': latestVersion,
-      'radix-ui/colors': latestVersion,
-      'radix-ui/react-icons': latestVersion,
+      '@radix-ui/themes': latestVersion,
+      '@radix-ui/colors': latestVersion,
+      '@radix-ui/react-icons': latestVersion,
     },
     devDependencies: {}
   },

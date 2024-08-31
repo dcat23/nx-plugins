@@ -41,7 +41,11 @@
         "items": [
           {
             "value": "mui",
-            "label": "Material UI [ https://mui.com ]"
+            "label": "Material UI [ https://mui.com          ]"
+          },
+          {
+            "value": "radix",
+            "label": "Radix UI    [ https://www.radix-ui.com ]"
           },
           { "value": "none", "label": "None" }
         ]
