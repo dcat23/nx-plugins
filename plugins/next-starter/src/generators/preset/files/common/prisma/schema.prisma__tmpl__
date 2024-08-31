@@ -1,27 +1,19 @@
 
 datasource db {
-  provider  =  <%= database %>
-  url       = env("DATABASE_URL")
-  <% if (database === "postgres") {%>
-  schemas   = ["frontend"]
-  <% } %>
+  provider  =  "<%= database %>"
+  url       = env("DATABASE_URL")<% if (database === "postgres") {%>
+  schemas   = ["frontend"]<% } %>
 }
 
 generator client {
-  provider        = "prisma-client-js"
-<% if (database === "postgres") { %>
-  previewFeatures = ["multiSchema"]
-<% } %>
+  provider        = "prisma-client-js"<% if (database === "postgres") { %>
+  previewFeatures = ["multiSchema"]<% } %>
 }
 
 model User {
   id            String    @id @default(cuid())
-  name          String?
-  <% if (authType === "github") { %>
-  gh_username   String?
-  <% } else { %>
-  username      String?
-  <% } %>
+  name          String?<% if (authType === "github") { %>
+  gh_username   String?<% } else { %>username      String?<% } %>
   email         String?   @unique
   emailVerified DateTime?
   image         String?
@@ -29,10 +21,8 @@ model User {
   updated_at    DateTime  @updatedAt
   accounts      Account[]
   sessions      Session[]
-
 <% if (database === "postgres") { %>
-  @@schema("frontend")
-<% } %>
+  @@schema("frontend")<% } %>
 }
 
 model Account {
@@ -55,10 +45,8 @@ model Account {
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
-  @@index([userId])
-<% if (database === "postgres") { %>
-  @@schema("frontend")
-<% } %>
+  @@index([userId])<% if (database === "postgres") { %>
+  @@schema("frontend")<% } %>
 }
 
 model Session {
@@ -68,10 +56,8 @@ model Session {
   expires      DateTime
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  @@index([userId])
-<% if (database === "postgres") { %>
-  @@schema("frontend")
-<% } %>
+  @@index([userId])<% if (database === "postgres") { %>
+  @@schema("frontend")<% } %>
 }
 
 model VerificationToken {
@@ -79,8 +65,6 @@ model VerificationToken {
   token      String   @unique
   expires    DateTime
 
-  @@unique([identifier, token])
-<% if (database === "postgres") { %>
-  @@schema("frontend")
-<% } %>
+  @@unique([identifier, token])<% if (database === "postgres") { %>
+  @@schema("frontend")<% } %>
 }
