@@ -1,0 +1,14 @@
+{
+  "executors": {
+    "dcat-publish": {
+      "implementation": "./src/executors/dcat-publish/executor",
+      "schema": "./src/executors/dcat-publish/schema.json",
+      "description": "dcat-publish executor"
+    },
+    "publish": {
+      "implementation": "./src/executors/publish/executor",
+      "schema": "./src/executors/publish/schema.json",
+      "description": "publish executor"
+    }
+  }
+}

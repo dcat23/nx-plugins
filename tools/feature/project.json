@@ -45,9 +45,10 @@
         ]
       }
     },
-    "nx-release-publish": {
+    "publish": {
+      "executor": "dcat23-nx:publish",
       "options": {
-        "packageRoot": "dist/{projectRoot}"
+        "distPath": "dist/tools/feature"
       }
     },
     "test": {
