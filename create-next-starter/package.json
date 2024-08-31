@@ -1,5 +1,5 @@
 {
-  "name": "create-next-starter",
+  "name": "@dcat23/create-next-starter",
   "version": "0.0.1",
   "dependencies": {
     "create-nx-workspace": "19.6.2",
@@ -10,6 +10,9 @@
   "main": "./src/index.js",
   "typings": "./src/index.d.ts",
   "bin": {
-    "create-next-starter": "./bin/index.js"
+    "@dcat23/create-next-starter": "./bin/index.js"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

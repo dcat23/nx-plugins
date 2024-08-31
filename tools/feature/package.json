@@ -12,11 +12,14 @@
   "author": "Devin Catuns",
   "repository": {
     "type": "git",
-    "url": "git@github.com:dcat23/nx-plugins.git",
+    "url": "https://github.com/dcat23/nx-plugins",
     "directory": "tools/feature"
   },
   "bugs": {
     "url": "https://github.com/dcat23/nx-plugins/issues"
   },
-  "homepage": "https://github.com/dcat23/nx-plugins/tree/main/tools/feature#readme"
+  "homepage": "https://github.com/dcat23/nx-plugins/tree/main/tools/feature#readme",
+  "publishConfig": {
+    "access": "public"
+  }
 }
