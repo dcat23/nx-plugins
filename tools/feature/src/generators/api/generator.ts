@@ -15,12 +15,11 @@ export async function apiGenerator(
     options,
   )
 
-  console.log(opts)
   createApiFiles(tree, opts);
   addToIndex(tree, opts);
 
   if (opts.hook) {
-    await hookGenerator(tree, {
+    hookGenerator(tree, {
       name: opts.name,
       feature: opts.feature,
       directory: options.directory,

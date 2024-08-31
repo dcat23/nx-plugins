@@ -1,6 +1,7 @@
 {
   "name": "@dcat23/nx-feature",
   "version": "0.0.1",
+  "private": false,
   "dependencies": {
     "@nx/devkit": "19.6.2",
     "tslib": "^2.3.0"
@@ -18,8 +19,5 @@
   "bugs": {
     "url": "https://github.com/dcat23/nx-plugins/issues"
   },
-  "homepage": "https://github.com/dcat23/nx-plugins/tree/main/tools/feature#readme",
-  "publishConfig": {
-    "access": "public"
-  }
+  "homepage": "https://github.com/dcat23/nx-plugins/tree/main/tools/feature#readme"
 }
