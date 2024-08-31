@@ -12,7 +12,7 @@
   "author": "Devin Catuns",
   "repository": {
     "type": "git",
-    "url": "https://github.com/dcat23/nx-plugins",
+    "url": "git+https://github.com/dcat23/nx-plugins.git",
     "directory": "tools/feature"
   },
   "bugs": {
