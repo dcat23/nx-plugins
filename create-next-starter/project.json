@@ -23,9 +23,10 @@
         "assets": ["create-next-starter/*.md"]
       }
     },
-    "nx-release-publish": {
+    "publish": {
+      "executor": "dcat23-nx:publish",
       "options": {
-        "packageRoot": "dist/{projectRoot}"
+        "distPath": "dist/create-next-starter"
       }
     },
     "test": {
