@@ -14,6 +14,11 @@
       "factory": "./src/generators/api/generator",
       "schema": "./src/generators/api/schema.json",
       "description": "Creates an api component for a NextJs application"
+    },
+    "store": {
+      "factory": "./src/generators/store/generator",
+      "schema": "./src/generators/store/schema.json",
+      "description": "Creates a state management store component for a NextJs application"
     }
   }
 }
