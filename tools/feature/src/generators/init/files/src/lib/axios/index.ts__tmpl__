@@ -1,0 +1,24 @@
+import axios, { AxiosError } from "axios";
+import { BACKEND_API_URL } from '../config';
+
+const api = axios.create({
+  baseURL: BACKEND_API_URL,
+  headers: {
+    'Content-Type': 'application/json',
+  },
+});
+
+export function handleError(error: any) {
+  if (axios.isAxiosError(error)) {
+    const e = (error as AxiosError);
+    console.error("Axios Error:", e.message, e.response?.data);
+    return e.response?.data || "Unknown error"
+  }
+
+  console.error("Unhandled Error:", error);
+  return error.message || "Unhandled error"
+};
+
+export default api
+
+

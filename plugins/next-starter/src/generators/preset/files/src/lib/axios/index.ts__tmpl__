@@ -9,19 +9,19 @@ const api = axios.create({
   },
 });
 
-api.interceptors.request.use(
-  async (config) => {
-    const session = await auth();
-
-    if (session?.user?.jwtToken) {
-      config.headers.Authorization = `Bearer ${session.user.jwtToken}`;
-    }
-    return config;
-  },
-  (error) => {
-    return Promise.reject(error);
-  }
-);
+// api.interceptors.request.use(
+//   async (config) => {
+//     const session = await auth();
+//
+//     if (session?.user?.jwtToken) {
+//       config.headers.Authorization = `Bearer ${session.user.jwtToken}`;
+//     }
+//     return config;
+//   },
+//   (error) => {
+//     return Promise.reject(error);
+//   }
+// );
 
 // api.interceptors.response.use(
 //   (response) => response,

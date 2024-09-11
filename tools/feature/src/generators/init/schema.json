@@ -16,6 +16,16 @@
       "type": "string",
       "description": "Directory where the generator will be used",
       "default": "."
+    },
+    "skipPackageJson": {
+      "type": "boolean",
+      "description": "Skips adding dependencies to package json",
+      "default": false
+    },
+    "keepExistingVersions": {
+      "type": "boolean",
+      "description": "Will keep existing versions if installed in packageJson",
+      "default": true
     }
   },
   "required": []
