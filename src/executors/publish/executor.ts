@@ -4,10 +4,6 @@ import { join } from "path";
 import { existsSync } from "fs";
 import { execSync } from "child_process";
 
-function resetVersion(packageJsonPath: string, packageJson: any, originalVersion: string) {
-
-}
-
 const runExecutor: PromiseExecutor<PublishExecutorSchema> = async (
   options,
   context
@@ -20,8 +16,10 @@ const runExecutor: PromiseExecutor<PublishExecutorSchema> = async (
     ? readJsonFile(packageJsonPath)
     : undefined;
 
+  const originalVersion = packageJson.version;
   if (options.tag) {
-    packageJson.version += "-" + options.tag;
+    packageJson.version = originalVersion + "-" + options.tag;
+    console.log("Using tagged version", packageJson.version);
     writeJsonFile(packageJsonPath, packageJson);
   }
 
@@ -29,6 +27,12 @@ const runExecutor: PromiseExecutor<PublishExecutorSchema> = async (
   try {
     console.log(`Publishing ${projectRoot}@${packageJson.version} ...`);
     execSync(`npm publish ${options.distPath} --access public`, { stdio: 'inherit' });
+    if (packageJson.version != originalVersion) {
+      const tagged = readJsonFile(packageJsonPath);
+      tagged.version = originalVersion;
+      console.log("Resetting version to", tagged.version);
+      writeJsonFile(packageJsonPath, tagged);
+    }
 
     return { success: true };
   } catch (error) {

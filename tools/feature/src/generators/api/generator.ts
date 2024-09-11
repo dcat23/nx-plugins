@@ -19,7 +19,7 @@ export async function apiGenerator(
   addToIndex(tree, opts);
 
   if (opts.hook) {
-    hookGenerator(tree, {
+    await hookGenerator(tree, {
       name: opts.name,
       feature: opts.feature,
       directory: options.directory,
