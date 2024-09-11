@@ -45,7 +45,7 @@ export async function normalizeOptions<
 
   const { name: artifactName, fileName, propertyName, className, constantName } = nameMutator(name)
   const filePath = joinPathFragments(packageName, fileName);
-  const indexPath = joinPathFragments(useSrc ? sourceRoot : "", directory);
+  const indexPath = joinPathFragments(`${useSrc && sourceRoot}`, directory);
   const relativePath = joinPathFragments(indexPath, packageName);
 
   return {

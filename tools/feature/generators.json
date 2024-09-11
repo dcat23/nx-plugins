@@ -19,6 +19,11 @@
       "factory": "./src/generators/store/generator",
       "schema": "./src/generators/store/schema.json",
       "description": "Creates a state management store component for a NextJs application"
+    },
+    "init": {
+      "factory": "./src/generators/init/generator",
+      "schema": "./src/generators/init/schema.json",
+      "description": "Initializes Feature plugin to use generators"
     }
   }
 }
