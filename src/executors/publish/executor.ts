@@ -4,6 +4,13 @@ import { join } from "path";
 import { existsSync } from "fs";
 import { execSync } from "child_process";
 
+function resetVersion(packageJsonPath: string, originalVersion) {
+  const tagged = readJsonFile(packageJsonPath);
+  tagged.version = originalVersion;
+  console.log("Resetting version to", tagged.version);
+  writeJsonFile(packageJsonPath, tagged);
+}
+
 const runExecutor: PromiseExecutor<PublishExecutorSchema> = async (
   options,
   context
@@ -23,22 +30,21 @@ const runExecutor: PromiseExecutor<PublishExecutorSchema> = async (
     writeJsonFile(packageJsonPath, packageJson);
   }
 
+  let success = false;
 
   try {
-    console.log(`Publishing ${projectRoot}@${packageJson.version} ...`);
+    console.log(`Publishing ${projectRoot}@${packageJson.version}`);
     execSync(`npm publish ${options.distPath} --access public`, { stdio: 'inherit' });
-    if (packageJson.version != originalVersion) {
-      const tagged = readJsonFile(packageJsonPath);
-      tagged.version = originalVersion;
-      console.log("Resetting version to", tagged.version);
-      writeJsonFile(packageJsonPath, tagged);
-    }
-
-    return { success: true };
+    success = true
   } catch (error) {
-    console.error('Failed to publish:', error);
-    return { success: false };
+    console.error('Failed to publish:', error.message);
   }
+
+  if (packageJson.version != originalVersion) {
+    resetVersion(packageJsonPath, originalVersion);
+  }
+
+  return { success }
 };
 
 export default runExecutor;
