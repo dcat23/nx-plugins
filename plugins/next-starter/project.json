@@ -48,7 +48,7 @@
     "publish": {
       "executor": "dcat23-nx:publish",
       "options": {
-        "distPath": "dist/plugins/next-starter"
+        "distPath": "./dist/plugins/next-starter"
       }
     },
     "lint": {

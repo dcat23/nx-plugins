@@ -11,8 +11,17 @@
   "main": "./src/index.js",
   "typings": "./src/index.d.ts",
   "bin": {
-    "@dcat23/create-next-starter": "./bin/index.js"
+    "dcat23-next-starter": "./bin/index.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:dcat23/dcat23-nx.git",
+    "directory": "create-next-starter"
+  },
+  "bugs": {
+    "url": "https://github.com/dcat23/dcat23-nx/issues"
+  },
+  "homepage": "https://github.com/dcat23/dcat23-nx/tree/main/create-next-starter#readme",
   "publishConfig": {
     "access": "public"
   }

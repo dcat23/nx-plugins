@@ -12,6 +12,15 @@
   "main": "./src/index.js",
   "typings": "./src/index.d.ts",
   "generators": "./generators.json",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:dcat23/dcat23-nx.git",
+    "directory": "plugins/next-starter"
+  },
+  "bugs": {
+    "url": "https://github.com/dcat23/dcat23-nx/issues"
+  },
+  "homepage": "https://github.com/dcat23/dcat23-nx/tree/main/plugins/next-starter#readme",
   "publishConfig": {
     "access": "public"
   }

@@ -19,7 +19,7 @@ Run `npx nx graph` to visually explore what got created. Now, let's get you up t
 
     ```bash
     nx run-many --targets build
-    nx run-many --targets nx-release-publish
+    nx run-many --targets publish
     ```
 
 3. Create temporary project
@@ -28,6 +28,12 @@ Run `npx nx graph` to visually explore what got created. Now, let's get you up t
     cd tmp
     rm -rf ./frontend*
     npx nx g @dcat23/next-starter:preset macc-test-preset --directory tmp/frontend  
+   ```
+
+## Creating a Plugin
+
+   ```sh
+   npx nx generate @nx/plugin:generator --name preset --directory plugins/next-starter
    ```
 
 ## Creating a Preset Generator
@@ -45,7 +51,7 @@ Build task
 
 Publish to NPM
    ```sh
-   npx nx nx-release-publish next-starter
+   npx nx publish feature -- --tag dev
    ```
 
 ## Helpful commands

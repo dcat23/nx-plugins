@@ -27,7 +27,7 @@ const runExecutor: PromiseExecutor<PublishExecutorSchema> = async (
 
 
   try {
-    console.log(`Publishing ${projectRoot}@${packageJson.version}...`);
+    console.log(`Publishing ${projectRoot}@${packageJson.version} ...`);
     execSync(`npm publish ${options.distPath} --access public`, { stdio: 'inherit' });
 
     return { success: true };
