@@ -14,7 +14,13 @@ describe('init generator', () => {
 
   it('should run successfully', async () => {
     await initGenerator(tree, options);
+    const root = options.projectRoot
     const config = readProjectConfiguration(tree, 'test');
     expect(config).toBeDefined();
+    expect(tree.exists(`${root}/src/lib/axios/index.ts`)).toBe(true);
+    expect(tree.exists(`${root}/src/lib/axios/error.ts`)).toBe(true);
+    expect(tree.exists(`${root}/src/lib/providers/react-query-provider.tsx`)).toBe(true);
+    expect(tree.exists(`${root}/src/lib/config.ts`)).toBe(true);
+    expect(tree.exists(`${root}/src/lib/constants.ts`)).toBe(true);
   });
 });

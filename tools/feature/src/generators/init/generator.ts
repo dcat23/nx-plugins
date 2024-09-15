@@ -3,9 +3,12 @@ import {
   addProjectConfiguration,
   formatFiles,
   generateFiles,
-  type GeneratorCallback, readJson, removeDependenciesFromPackageJson,
+  type GeneratorCallback,
+  readJson,
+  removeDependenciesFromPackageJson,
   runTasksInSerial,
-  Tree, writeJson, writeJsonFile,
+  Tree,
+  writeJson,
 } from '@nx/devkit';
 import * as path from 'path';
 import { InitGeneratorSchema } from './schema';
@@ -29,6 +32,7 @@ function updateDependencies(host: Tree, schema: InitGeneratorSchema) {
       {
         '@tanstack/react-query': latestVersion,
         'axios': latestVersion,
+        'sonner': latestVersion,
         'zod': latestVersion,
         'zustand': latestVersion,
       },
@@ -44,7 +48,10 @@ function updateDependencies(host: Tree, schema: InitGeneratorSchema) {
 function setDefaultTsConfig(tree: Tree, options: InitGeneratorSchema) {
   const tsConfigPath = path.join(options.projectRoot, "tsconfig.json")
 
-  const tsConfig = readJson(tree, tsConfigPath) ?? {};
+
+  const tsConfig = tree.exists(tsConfigPath)
+    ? readJson(tree, tsConfigPath)
+    : {}
 
   tsConfig["compilerOptions"] ??= {};
   tsConfig["compilerOptions"]["baseUrl"] ??= options.projectRoot;

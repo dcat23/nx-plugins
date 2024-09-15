@@ -8,16 +8,7 @@ const api = axios.create({
   },
 });
 
-export function handleError(error: any) {
-  if (axios.isAxiosError(error)) {
-    const e = (error as AxiosError);
-    console.error("Axios Error:", e.message, e.response?.data);
-    return e.response?.data || "Unknown error"
-  }
-
-  console.error("Unhandled Error:", error);
-  return error.message || "Unhandled error"
-};
+export * from "./error";
 
 export default api
 

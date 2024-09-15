@@ -9,7 +9,7 @@ export function <%= propertyName %>()  {
   <% if (hookType === "mutation") { %>
   return useMutation<T>({
     mutationFn: async () => {
-        return <%= propertyName.replace("use","").replace("-","") %>();
+        return <% propertyName.replace("use","").replace("-","") %>();
     },
 
     onSuccess: (data) => {
