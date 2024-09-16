@@ -23,7 +23,6 @@ export async function utilGeneratorInternal(
     options,
   );
 
-  console.log(opts)
   addMiscFiles(tree, opts)
   addToIndex(tree, opts);
 }

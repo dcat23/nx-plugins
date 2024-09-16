@@ -3,26 +3,35 @@ import { ApiGeneratorSchema, NormalizedApiGeneratorSchema } from './schema';
 import { hookGenerator } from '../hook/generator';
 import { join } from 'path';
 import { addToIndex, normalizeOptions } from '../../lib/utils';
-import { noPrefixName } from "../../lib/helper";
+import { addMiscFiles } from "../../lib/add-misc-file";
 
 export async function apiGenerator(
   tree: Tree,
   options: ApiGeneratorSchema
 ) {
+  return apiGeneratorInternal(tree, {
+    packageName: "api",
+    ...options
+  });
+}
+export async function apiGeneratorInternal(
+  tree: Tree,
+  options: ApiGeneratorSchema
+) {
   const opts = await normalizeOptions(
     tree,
-    'api',
+    options.skipPackage ? "" : options.packageName,
     '@dcat23/nx-feature:api',
     options,
   )
 
   const templateOptions = {
     ...opts,
-    ...noPrefixName(opts.name),
     tmpl: ""
   }
 
   createApiFiles(tree, templateOptions);
+  addMiscFiles(tree, templateOptions);
   addToIndex(tree, templateOptions);
 
   if (opts.hook || opts.mutation || opts.query) {

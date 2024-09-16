@@ -19,7 +19,7 @@ const constantText = (options: Normalized<FeatureSchema & NoPrefixNameType>) => 
 }
 
 const mapperText = (options: Normalized<FeatureSchema & NoPrefixNameType>) =>{
-  return `export function mapTo${options.noPrefixClassName}(data: any) {
+  return `export function mapTo${options.noPrefixClassName}(data: any): ${options.noPrefixClassName} {
     
     return {
       ...data,
@@ -34,7 +34,7 @@ function addMiscFile(host: Tree, options: Normalized<FeatureSchema & NoPrefixNam
     constant: constantText(options),
     helper: helperText(options),
     mapper: mapperText(options),
-    type: typeText(options)
+    types: typeText(options)
   }
 
   const file = joinPathFragments(
@@ -77,7 +77,7 @@ export function addMiscFiles(host: Tree, options: Normalized<FeatureSchema & NoP
     addMiscFile(host, options, "mapper");
   }
 
-  if (options.type) {
-    addMiscFile(host, options, "type");
+  if (options.types) {
+    addMiscFile(host, options, "types");
   }
 }

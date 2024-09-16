@@ -6,6 +6,4 @@ export interface ApiGeneratorSchema extends FeatureSchema {
   query?: boolean;
 }
 
-export type NormalizedApiGeneratorSchema = Normalized<ApiGeneratorSchema> & {
-
-}
+export type NormalizedApiGeneratorSchema = Normalized<ApiGeneratorSchema>

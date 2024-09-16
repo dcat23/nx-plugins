@@ -1,8 +1,9 @@
 "use server"
 
 import axios, { handleError } from "@/lib/axios";
-
-type <%= noPrefixClassName %> = unknown;
+<% if (types) { %>import type { <%= noPrefixClassName %> } from "../types";
+<% } else { %>
+type <%= noPrefixClassName %> = unknown;<% } %>
 
 export async function <%= propertyName %>(body: unknown): Promise<<%= noPrefixClassName %>> {
   const params: URLSearchParams = new URLSearchParams();
@@ -10,7 +11,8 @@ export async function <%= propertyName %>(body: unknown): Promise<<%= noPrefixCl
 
   try {
     const { data } = await axios.get<<%= noPrefixClassName %>>(url);
-    return data;
+    <% if (mapper) { %>return mapTo<%= noPrefixClassName %>(data)
+    <% } else { %>return data<% } %>
   } catch (error: any) {
     return handleError(error)
   }

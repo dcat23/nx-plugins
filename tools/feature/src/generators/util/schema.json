@@ -34,22 +34,35 @@
       "type": "boolean",
       "description": "Will skip creating package and store in source directory"
     },
-    "types": {
+    "allMisc": {
+      "type": "boolean",
+      "description": "Creates all Miscellaneous files (type, helper, mapper, constant)",
+      "alias": "a"
+    },
+    "misc": {
       "type": "array",
       "description": "Miscellaneous files to create (type, helper, mapper, constant)"
     },
-    "type": {
-      "type": "string",
-      "description": "Create a type export in the types.ts file"
+    "types": {
+      "type": "boolean",
+      "description": "Create a type export in the types.ts file",
+      "alias": "t"
     },
     "helper": {
-      "type": "string",
-      "description": "Create an helper method in the helpers.ts file"
+      "type": "boolean",
+      "description": "Create a helper method in the helpers.ts file",
+      "alias": "h"
     },
     "constant": {
-      "type": "array",
-      "description": "Create a constant variable in the constants.ts file"
+      "type": "boolean",
+      "description": "Create a constant variable in the constant.ts file",
+      "alias": "c"
     },
+    "mapper": {
+      "type": "boolean",
+      "description": "Create a mapper function in the mapper.ts file",
+      "alias": "m"
+    }
   },
   "required": ["name"]
 }

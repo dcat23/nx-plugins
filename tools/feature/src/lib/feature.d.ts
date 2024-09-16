@@ -1,4 +1,4 @@
-export type MiscType = "type" | "helper" | "mapper" | "constant"
+export type MiscType = "types" | "helper" | "mapper" | "constant"
 
 export interface FeatureSchema {
   name: string;
@@ -8,8 +8,9 @@ export interface FeatureSchema {
   project?: string;
   packageName?: string;
   skipPackage?: boolean;
+  allMisc?: boolean;
   misc?: MiscType[];
-  type?: boolean;
+  types?: boolean;
   helper?: boolean;
   mapper?: boolean;
   constant?: boolean;

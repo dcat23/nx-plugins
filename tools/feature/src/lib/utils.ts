@@ -27,7 +27,6 @@ export async function normalizeOptions<
   nameMutator = names,
 ): Promise<Normalized<Schema & NoPrefixNameType>> {
 
-  const useSrc = !options.directory
   const {
     artifactName: name,
     directory,
@@ -44,16 +43,18 @@ export async function normalizeOptions<
       nameAndDirectoryFormat: "as-provided",
     });
 
-  const {sourceRoot} = readProjectConfiguration(tree, projectName);
+  const useSrc = !options.directory
+  const { sourceRoot } = readProjectConfiguration(tree, projectName);
 
-  const {name: artifactName, fileName, propertyName, className, constantName} = nameMutator(name)
+  const { name: artifactName, fileName, propertyName, className, constantName } = nameMutator(name)
   const filePath = joinPathFragments(packageName, fileName);
   const indexPath = joinPathFragments(`${useSrc && sourceRoot}`, directory);
   const relativePath = joinPathFragments(indexPath, packageName);
 
-  const helper = options.helper || options.misc.includes("helper")
-  const mapper = options.mapper || options.misc.includes("mapper")
-  const constant = options.constant || options.misc.includes("constant")
+  const constant = options.constant || options.misc?.includes("constant") || options.allMisc
+  const helper = options.helper || options.misc?.includes("helper") || options.allMisc
+  const mapper = options.mapper || options.misc?.includes("mapper") || options.allMisc
+  const types = options.types || options.misc?.includes("types") || options.allMisc
 
 
   return {
@@ -72,6 +73,7 @@ export async function normalizeOptions<
     helper,
     mapper,
     constant,
+    types,
     ...noPrefixName(name),
   };
 

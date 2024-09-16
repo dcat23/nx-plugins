@@ -4,7 +4,7 @@ export type NoPrefixNameType =  ReturnType<typeof noPrefixName>
 
 export function noPrefixName(prefixedName: string) {
   const noPrefix = prefixedName
-    .replace(/^(use|with|get|create|add|remove|delete)/, "")
+    .replace(/^(use|with|start|update|read|submit|get|create|add|remove|delete)/, "")
     .replace(/(s)$/, "");
   const { name, propertyName, className, fileName, constantName } = names(noPrefix);
   return {
