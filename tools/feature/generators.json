@@ -24,6 +24,11 @@
       "factory": "./src/generators/init/generator",
       "schema": "./src/generators/init/schema.json",
       "description": "Initializes Feature plugin to use generators"
+    },
+    "util": {
+      "factory": "./src/generators/util/generator",
+      "schema": "./src/generators/util/schema.json",
+      "description": "Generates utility files"
     }
   }
 }
