@@ -2,8 +2,7 @@ import { toast } from "sonner";
 <%- mutationImport %><%- queryImport %>
 
 export function <%- propertyName %>() {
-  <% if (mutationFunction) { %><%- include('mutation.ejs') %><% } %>
-  <% if (queryFunction) { %><%- include('query.ejs') %><% } %>
+  <%- mutationFunction %><%- queryFunction %>
 
   return {
 

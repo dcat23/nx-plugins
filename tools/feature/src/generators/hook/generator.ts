@@ -16,6 +16,7 @@ export async function hookGenerator(
     options.mutation = true;
   }
   return hookGeneratorInternal(tree, {
+    packageName: "hooks",
     ...options,
   });
 }
@@ -26,30 +27,26 @@ export async function hookGeneratorInternal(
 
   const normalizedOptions = await normalizeOptions(
     tree,
-    'hooks',
+    options.skipPackage ? "" : options.packageName,
     '@dcat23/nx-feature:hook',
     options,
     prefixName
   )
 
+  const noPrefixNames = noPrefixName(normalizedOptions.name)
+
   const templateOptions = {
     ...normalizedOptions,
-    ...noPrefixName(normalizedOptions.name),
-    ...mutationOptions(options.mutation),
-    ...queryOptions(options.query),
+    ...noPrefixNames,
+    ...mutationOptions({...normalizedOptions, ...noPrefixNames}),
+    ...queryOptions({...normalizedOptions, ...noPrefixNames}),
     tmpl: "",
-    skipFiles: ['mutation.ejs', 'query.ejs']
   }
 
   createHookFiles(tree, templateOptions);
-  removeTemplates(tree, normalizedOptions.relativePath)
   addToIndex(tree, templateOptions);
 }
 
-function removeTemplates(tree: Tree, relativePath: any) {
-  tree.delete(`${relativePath}/mutation.ejs`);
-  tree.delete(`${relativePath}/query.ejs`);
-}
 
 export function createHookFiles(host: Tree, options: NormalizedHookGeneratorSchema) {
   generateFiles(
