@@ -37,7 +37,7 @@
     "allMisc": {
       "type": "boolean",
       "description": "Creates all Miscellaneous files (type, helper, mapper, constant)",
-      "alias": "a"
+      "alias": "all"
     },
     "misc": {
       "type": "array",

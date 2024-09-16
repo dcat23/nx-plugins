@@ -1,6 +1,6 @@
 import { join } from 'path';
 import { joinPathFragments, names, readProjectConfiguration, Tree } from '@nx/devkit';
-import { FeatureSchema, Normalized } from './feature';
+import { FeatureSchema, MiscType, Normalized } from './feature';
 import { determineArtifactNameAndDirectoryOptions } from '@nx/devkit/src/generators/artifact-name-and-directory-utils';
 import { noPrefixName, NoPrefixNameType } from "./helper";
 
@@ -79,28 +79,3 @@ export async function normalizeOptions<
 
 }
 
-export function addToIndex(host: Tree, opts: Normalized<FeatureSchema>) {
-
-  if (opts.skipExport) return;
-
-  const indexFile = joinPathFragments(
-    opts.indexPath,
-    "index.ts",
-  )
-  const exportText = `export * from "./${opts.filePath}";`
-
-  if (!host.exists(indexFile)) {
-    host.write(indexFile, exportText)
-    return;
-  }
-
-  let indexSource = host.read(indexFile, "utf-8");
-  const lines = indexSource.split("\n");
-
-  if (!lines.includes(exportText)) {
-    lines.push(exportText)
-    indexSource = lines.filter(l => !!l).sort().join("\n");
-    host.write(indexFile, indexSource);
-  }
-
-}

@@ -32,13 +32,50 @@
     },
     "mutation": {
       "type": "boolean",
-      "description": "Will create the associated mutation hook in the same directory",
-      "alias": "m"
+      "description": "Will create the associated mutation hook in the same directory"
     },
     "query": {
       "type": "boolean",
       "description": "Will create the associated query hook in the same directory",
       "alias": "q"
+    },
+    "packageName": {
+      "type": "string",
+      "description": "Where to create the hook component package in the source directory",
+      "default": "hooks"
+    },
+    "skipPackage": {
+      "type": "boolean",
+      "description": "Will skip creating package and store in source directory"
+    },
+    "allMisc": {
+      "type": "boolean",
+      "description": "Creates all Miscellaneous files (type, helper, mapper, constant)",
+      "alias": "all"
+    },
+    "misc": {
+      "type": "array",
+      "description": "Miscellaneous files to create (type, helper, mapper, constant)"
+    },
+    "types": {
+      "type": "boolean",
+      "description": "Create a type export in the types.ts file",
+      "alias": "t"
+    },
+    "helper": {
+      "type": "boolean",
+      "description": "Create a helper method in the helper.ts file",
+      "alias": "h"
+    },
+    "constant": {
+      "type": "boolean",
+      "description": "Create a constant variable in the constant.ts file",
+      "alias": "c"
+    },
+    "mapper": {
+      "type": "boolean",
+      "description": "Create a mapper function in the mapper.ts file",
+      "alias": "m"
     }
   },
   "required": ["name"]

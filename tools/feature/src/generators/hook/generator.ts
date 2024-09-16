@@ -1,10 +1,10 @@
-import { generateFiles, OverwriteStrategy, Tree } from '@nx/devkit';
+import { formatFiles, generateFiles, OverwriteStrategy, Tree } from '@nx/devkit';
 import { HookGeneratorSchema, NormalizedHookGeneratorSchema } from './schema';
 import { join } from 'path';
 import { addToIndex, normalizeOptions } from '../../lib/utils';
 import { prefixName } from './lib/normalize-options';
-import { noPrefixName } from "../../lib/helper";
 import { mutationOptions, queryOptions } from "./lib/helper";
+import { addMiscFiles } from "../../lib/add-misc-file";
 
 
 export async function hookGenerator(
@@ -33,18 +33,18 @@ export async function hookGeneratorInternal(
     prefixName
   )
 
-  const noPrefixNames = noPrefixName(normalizedOptions.name)
-
   const templateOptions = {
     ...normalizedOptions,
-    ...noPrefixNames,
-    ...mutationOptions({...normalizedOptions, ...noPrefixNames}),
-    ...queryOptions({...normalizedOptions, ...noPrefixNames}),
+    ...mutationOptions(normalizedOptions),
+    ...queryOptions(normalizedOptions),
     tmpl: "",
   }
 
+
   createHookFiles(tree, templateOptions);
-  addToIndex(tree, templateOptions);
+  await addMiscFiles(tree, templateOptions);
+  await addToIndex(tree, templateOptions);
+  await formatFiles(tree);
 }
 
 

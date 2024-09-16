@@ -1,3 +1,5 @@
+import { NoPrefixNameType } from "./helper";
+
 export type MiscType = "types" | "helper" | "mapper" | "constant"
 
 export interface FeatureSchema {
@@ -29,4 +31,4 @@ export interface NormalizedFeature {
   projectName: string;
 }
 
-export type Normalized<Schema extends FeatureSchema> = NormalizedFeature & Schema;
+export type Normalized<Schema extends FeatureSchema> = NormalizedFeature & Schema & NoPrefixNameType;

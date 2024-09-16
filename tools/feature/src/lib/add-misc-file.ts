@@ -1,34 +1,36 @@
 import { FeatureSchema, MiscType, Normalized } from "./feature";
-import { NoPrefixNameType } from "./helper";
 import { joinPathFragments, Tree } from "@nx/devkit";
-import { addToIndex } from "./utils";
+import { Filtered } from "./add-to-index";
 
-const helperText = (options: Normalized<FeatureSchema & NoPrefixNameType>) => {
-  return `export function ${options.noPrefixPropertyName}() {
-    throw new Error("not implemented");
-  }
-  `
+const helperText = (options: Normalized<FeatureSchema>) => {
+  return `export function ${options.noPrefixPropertyName}Helper() {
+  throw new Error("not implemented");
+}
+`}
+
+const typeText = (options: Normalized<FeatureSchema>) => {
+  return `export interface ${options.noPrefixClassName} {}`
 }
 
-const typeText = (options: Normalized<FeatureSchema & NoPrefixNameType>) => {
-  return `export interface ${options.noPrefixConstantName} {}`
-}
-
-const constantText = (options: Normalized<FeatureSchema & NoPrefixNameType>) => {
+const constantText = (options: Normalized<FeatureSchema>) => {
   return `export const ${options.noPrefixConstantName} = null`;
 }
 
-const mapperText = (options: Normalized<FeatureSchema & NoPrefixNameType>) =>{
+const mapperText = (options: Normalized<FeatureSchema>) =>{
   return `export function mapTo${options.noPrefixClassName}(data: any): ${options.noPrefixClassName} {
-    
-    return {
-      ...data,
-    }
+  
+  return {
+    ...data,
   }
-  `
+}
+`
 }
 
-function addMiscFile(host: Tree, options: Normalized<FeatureSchema & NoPrefixNameType>, name: MiscType) {
+export function isMiscType(key: string): key is MiscType {
+  return ["types", "helper", "mapper", "constant"].includes(key);
+}
+
+function addMiscFile(host: Tree, options: Normalized<FeatureSchema>, name: MiscType) {
 
   const miscText: Record<MiscType, string> = {
     constant: constantText(options),
@@ -51,33 +53,21 @@ function addMiscFile(host: Tree, options: Normalized<FeatureSchema & NoPrefixNam
 
   const source = host.read(file, "utf-8");
 
-
   if (!source.includes(text)) {
     const output = source.concat("\n", text, "\n")
     host.write(file, output)
   }
-
-  addToIndex(host, {
-    ...options,
-    filePath: name
-  })
 }
 
-export function addMiscFiles(host: Tree, options: Normalized<FeatureSchema & NoPrefixNameType>) {
+export function filterMiscOptions(options: Normalized<FeatureSchema>) {
+  return Object.entries(options as Filtered<typeof options, MiscType>)
+    .filter(([key, value]) => isMiscType(key) && Boolean(value))
+    .map(([key]) => key as MiscType)
+}
 
-  if (options.helper) {
-    addMiscFile(host, options, "helper");
-  }
-
-  if (options.constant) {
-    addMiscFile(host, options, "constant");
-  }
-
-  if (options.mapper) {
-    addMiscFile(host, options, "mapper");
-  }
-
-  if (options.types) {
-    addMiscFile(host, options, "types");
-  }
+export function addMiscFiles(host: Tree, options: Normalized<FeatureSchema>) {
+  filterMiscOptions(options)
+    .forEach((option) => {
+      addMiscFile(host, options, option)
+    })
 }

@@ -2,8 +2,9 @@ import { generateFiles, OverwriteStrategy, Tree } from '@nx/devkit';
 import { ApiGeneratorSchema, NormalizedApiGeneratorSchema } from './schema';
 import { hookGenerator } from '../hook/generator';
 import { join } from 'path';
-import { addToIndex, normalizeOptions } from '../../lib/utils';
+import { normalizeOptions } from '../../lib/utils';
 import { addMiscFiles } from "../../lib/add-misc-file";
+import { addToIndex } from "../../lib/add-to-index";
 
 export async function apiGenerator(
   tree: Tree,
@@ -14,11 +15,12 @@ export async function apiGenerator(
     ...options
   });
 }
+
 export async function apiGeneratorInternal(
   tree: Tree,
   options: ApiGeneratorSchema
 ) {
-  const opts = await normalizeOptions(
+  const normalizedOptions = await normalizeOptions(
     tree,
     options.skipPackage ? "" : options.packageName,
     '@dcat23/nx-feature:api',
@@ -26,7 +28,7 @@ export async function apiGeneratorInternal(
   )
 
   const templateOptions = {
-    ...opts,
+    ...normalizedOptions,
     tmpl: ""
   }
 
@@ -34,12 +36,10 @@ export async function apiGeneratorInternal(
   addMiscFiles(tree, templateOptions);
   addToIndex(tree, templateOptions);
 
-  if (opts.hook || opts.mutation || opts.query) {
+  if (normalizedOptions.hook || normalizedOptions.mutation || normalizedOptions.query) {
     await hookGenerator(tree, {
-      ...opts,
+      ...normalizedOptions,
       name: templateOptions.noPrefixName,
-      feature: opts.feature,
-      directory: options.directory,
     });
   }
 }
