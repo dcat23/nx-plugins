@@ -1,31 +1,11 @@
-<% if (hookType === "mutation") { %>
-import { useMutation } from "@tanstack/react-query";
-<% } else { %>
-import { useQuery } from "@tanstack/react-query";
-<% } %>
-type T = unknown;
+import { toast } from "sonner";
+<%- mutationImport %><%- queryImport %>
 
-export function <%= propertyName %>()  {
-  <% if (hookType === "mutation") { %>
-  return useMutation<T>({
-    mutationFn: async () => {
-        return <%= propertyName.replace("use","").replace("-","") %>();
-    },
+export function <%- propertyName %>() {
+  <% if (mutationFunction) { %><%- include('mutation.ejs') %><% } %>
+  <% if (queryFunction) { %><%- include('query.ejs') %><% } %>
 
-    onSuccess: (data) => {
-      console.log("<%= propertyName %>", data);
-    },
+  return {
 
-    onError: (error) => {
-      console.error("<%= propertyName %>", error);
-    },
-  });
-  <% } else { %>
-  return useQuery<T>({
-    queryKey: ["<%= name %>"],
-    queryFn: async () => {
-      return propertyName.replace("use","").replace("-","") %>();
-    },
-  });
-  <% } %>
+  }
 }

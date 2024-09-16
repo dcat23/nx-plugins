@@ -1,0 +1,15 @@
+const m = useMutation<<%= noPrefixClassName %>>({
+    mutationFn: async () => {
+        return <%= noPrefixPropertyName %>();
+    },
+
+    onSuccess: (data) => {
+        toast.success(`<%= fileName %> ${data}`);
+        console.log("<%= fileName %>", data);
+    },
+
+    onError: (error) => {
+        toast.error(`${error.message}`);
+        console.error("<%= fileName %>", error);
+    },
+});

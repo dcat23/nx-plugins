@@ -6,7 +6,5 @@ export interface HookGeneratorSchema extends FeatureSchema {
 }
 
 export type NormalizedHookGeneratorSchema = Normalized<HookGeneratorSchema> & {
-  hookType: HookType
-}
 
-type HookType = "query" | "mutation"
+}

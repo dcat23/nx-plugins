@@ -1,5 +1,6 @@
 {
   "name": "feature",
+  "exclude": ["**/*.ejs"],
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "tools/feature/src",
   "projectType": "library",
