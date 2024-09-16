@@ -3,6 +3,7 @@ import { ApiGeneratorSchema, NormalizedApiGeneratorSchema } from './schema';
 import { hookGenerator } from '../hook/generator';
 import { join } from 'path';
 import { addToIndex, normalizeOptions } from '../../lib/utils';
+import { noPrefixName } from "../../lib/helper";
 
 export async function apiGenerator(
   tree: Tree,
@@ -15,8 +16,14 @@ export async function apiGenerator(
     options,
   )
 
-  createApiFiles(tree, opts);
-  addToIndex(tree, opts);
+  const templateOptions = {
+    ...opts,
+    ...noPrefixName(opts.name),
+    tmpl: ""
+  }
+
+  createApiFiles(tree, templateOptions);
+  addToIndex(tree, templateOptions);
 
   if (opts.hook) {
     await hookGenerator(tree, {
@@ -33,12 +40,9 @@ function createApiFiles(host: Tree, options: NormalizedApiGeneratorSchema) {
     host,
     join(__dirname, "files"),
     options.relativePath,
+    options,
     {
-      ...options,
-      tmpl: ""
-    },
-    {
-      overwriteStrategy: OverwriteStrategy.KeepExisting
+      overwriteStrategy: OverwriteStrategy.Overwrite
     }
   )
 }

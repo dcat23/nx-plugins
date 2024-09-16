@@ -44,3 +44,11 @@ Thumbs.db
 # Next.js
 .next
 out
+
+# Test
+src/api
+src/features
+src/components
+src/hooks
+src/utils
+src/index.ts
