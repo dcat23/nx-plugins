@@ -40,16 +40,16 @@ export function mapTo${options.noPrefixClassName}(data: any): ${options.noPrefix
 }`
 }
 
-export function isMiscType(key: string): key is MiscType {
-  return ["types", "helper", "mapper", "constant"].includes(key);
-}
-
 function commentText(name: MiscType, options: Normalized<FeatureSchema>) {
   const { packageName, propertyName } = options
   return `
 * ${packageName} ${propertyName} ${name} 
 * Generated: ${new Date().toDateString()}
 *`
+}
+
+export function isMiscType(key: string): key is MiscType {
+  return ["types", "helper", "mapper", "constant"].includes(key);
 }
 
 function addMiscFile(host: Tree, options: Normalized<FeatureSchema>, name: MiscType) {

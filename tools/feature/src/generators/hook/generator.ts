@@ -55,7 +55,7 @@ export function createHookFiles(host: Tree, options: NormalizedHookGeneratorSche
     options.relativePath,
     options,
     {
-      overwriteStrategy: OverwriteStrategy.Overwrite,
+      overwriteStrategy: OverwriteStrategy.KeepExisting,
     }
   )
 }

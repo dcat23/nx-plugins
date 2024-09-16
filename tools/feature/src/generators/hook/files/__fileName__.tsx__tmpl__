@@ -1,11 +1,19 @@
 import { toast } from "sonner";
-import { <%= noPrefixPropertyName %> } from "../api";
 <%- mutationImport %><%- queryImport %>
+import {
+  <% if (types) { %>type <%= noPrefixClassName %>,<% } %>
+  <%= noPrefixPropertyName %>
+} from "@/<%= relativePath.replace("src/", "") %>";
 
-export function <%- propertyName %>() {
+export function <%= propertyName %>() {
   <%- mutationFunction %><%- queryFunction %>
 
   return {
-
+<% if (mutationFunction) { %>
+  ...m,
+<% } %>
+<% if (queryFunction) { %>
+  ...q,
+<% } %>
   }
 }
