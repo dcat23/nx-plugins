@@ -17,7 +17,7 @@ function storeMutator(name: string) {
   const n = names(name);
   const prefix = /^use/.test(n.fileName) ? "" : "use";
   const suffix = /store$/.test(n.fileName) ? "" : "store";
-  const fileName = [prefix, n.fileName,suffix].join("-");
+  const fileName = [prefix, n.fileName, suffix].join("-");
   return {
     ...n,
     fileName

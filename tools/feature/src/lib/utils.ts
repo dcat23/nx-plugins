@@ -2,11 +2,14 @@ import { join } from 'path';
 import { joinPathFragments, names, readProjectConfiguration, Tree } from '@nx/devkit';
 import { FeatureSchema, Normalized } from './feature';
 import { determineArtifactNameAndDirectoryOptions } from '@nx/devkit/src/generators/artifact-name-and-directory-utils';
+import { noPrefixName, NoPrefixNameType } from "./helper";
+
 
 interface DirectoryOptions {
   directory?: string;
   feature?: string;
 }
+
 
 export function deriveDirectory(options: DirectoryOptions): string {
   if (options.directory) return options.directory;
@@ -21,8 +24,8 @@ export async function normalizeOptions<
   packageName: string,
   generator: string,
   options: Schema,
-  nameMutator = names
-): Promise<Normalized<Schema>> {
+  nameMutator = names,
+): Promise<Normalized<Schema & NoPrefixNameType>> {
 
   const useSrc = !options.directory
   const {
@@ -41,12 +44,17 @@ export async function normalizeOptions<
       nameAndDirectoryFormat: "as-provided",
     });
 
-  const { sourceRoot } = readProjectConfiguration(tree, projectName);
+  const {sourceRoot} = readProjectConfiguration(tree, projectName);
 
-  const { name: artifactName, fileName, propertyName, className, constantName } = nameMutator(name)
+  const {name: artifactName, fileName, propertyName, className, constantName} = nameMutator(name)
   const filePath = joinPathFragments(packageName, fileName);
   const indexPath = joinPathFragments(`${useSrc && sourceRoot}`, directory);
   const relativePath = joinPathFragments(indexPath, packageName);
+
+  const helper = options.helper || options.misc.includes("helper")
+  const mapper = options.mapper || options.misc.includes("mapper")
+  const constant = options.constant || options.misc.includes("constant")
+
 
   return {
     ...options,
@@ -61,6 +69,10 @@ export async function normalizeOptions<
     indexPath,
     relativePath,
     projectName,
+    helper,
+    mapper,
+    constant,
+    ...noPrefixName(name),
   };
 
 }
@@ -71,9 +83,8 @@ export function addToIndex(host: Tree, opts: Normalized<FeatureSchema>) {
 
   const indexFile = joinPathFragments(
     opts.indexPath,
-    "index.ts"
+    "index.ts",
   )
-
   const exportText = `export * from "./${opts.filePath}";`
 
   if (!host.exists(indexFile)) {
@@ -91,4 +102,3 @@ export function addToIndex(host: Tree, opts: Normalized<FeatureSchema>) {
   }
 
 }
-

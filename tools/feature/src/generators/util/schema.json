@@ -12,7 +12,44 @@
         "index": 0
       },
       "x-prompt": "What name would you like to use?"
-    }
+    },
+    "feature": {
+      "type": "string",
+      "description": "The package name to store the hook component",
+      "$default": {
+        "$source": "argv",
+        "index": 1
+      }
+    },
+    "directory": {
+      "type": "string",
+      "description": "Where to create the hook component"
+    },
+    "packageName": {
+      "type": "string",
+      "description": "Where to create the hook component package in the source directory",
+      "default": "utils"
+    },
+    "skipPackage": {
+      "type": "boolean",
+      "description": "Will skip creating package and store in source directory"
+    },
+    "types": {
+      "type": "array",
+      "description": "Miscellaneous files to create (type, helper, mapper, constant)"
+    },
+    "type": {
+      "type": "string",
+      "description": "Create a type export in the types.ts file"
+    },
+    "helper": {
+      "type": "string",
+      "description": "Create an helper method in the helpers.ts file"
+    },
+    "constant": {
+      "type": "array",
+      "description": "Create a constant variable in the constants.ts file"
+    },
   },
   "required": ["name"]
 }

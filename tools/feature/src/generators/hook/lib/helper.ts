@@ -1,9 +1,9 @@
 import { HookGeneratorSchema } from "../schema";
-import { noPrefixName } from "../../../lib/helper";
-import { NormalizedFeature } from "../../../lib/feature";
+import { NoPrefixNameType } from "../../../lib/helper";
+import { Normalized } from "../../../lib/feature";
 
-type PrefixNameType =  Partial<ReturnType<typeof noPrefixName>>
-export function mutationOptions(options: NormalizedFeature & HookGeneratorSchema & PrefixNameType) {
+
+export function mutationOptions(options: Normalized<HookGeneratorSchema & NoPrefixNameType>) {
   if (!options.mutation) {
     return {
       mutationFunction: "",
@@ -33,7 +33,7 @@ export function mutationOptions(options: NormalizedFeature & HookGeneratorSchema
   }
 }
 
-export function queryOptions(options: NormalizedFeature & HookGeneratorSchema & PrefixNameType) {
+export function queryOptions(options: Normalized<HookGeneratorSchema & NoPrefixNameType>) {
   if (!options.query) {
     return {
       queryImport: "",
