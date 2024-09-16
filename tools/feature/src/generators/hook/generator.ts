@@ -1,10 +1,11 @@
 import { formatFiles, generateFiles, OverwriteStrategy, Tree } from '@nx/devkit';
 import { HookGeneratorSchema, NormalizedHookGeneratorSchema } from './schema';
 import { join } from 'path';
-import { addToIndex, normalizeOptions } from '../../lib/utils';
+import { normalizeOptions } from '../../lib/utils';
 import { prefixName } from './lib/normalize-options';
 import { mutationOptions, queryOptions } from "./lib/helper";
 import { addMiscFiles } from "../../lib/add-misc-file";
+import { addToIndex } from "../../lib/add-to-index";
 
 
 export async function hookGenerator(
@@ -40,10 +41,9 @@ export async function hookGeneratorInternal(
     tmpl: "",
   }
 
-
   createHookFiles(tree, templateOptions);
-  await addMiscFiles(tree, templateOptions);
-  await addToIndex(tree, templateOptions);
+  addMiscFiles(tree, templateOptions);
+  addToIndex(tree, templateOptions);
   await formatFiles(tree);
 }
 

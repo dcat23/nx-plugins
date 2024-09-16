@@ -1,4 +1,4 @@
-import { generateFiles, OverwriteStrategy, Tree } from '@nx/devkit';
+import { formatFiles, generateFiles, OverwriteStrategy, Tree } from '@nx/devkit';
 import { ApiGeneratorSchema, NormalizedApiGeneratorSchema } from './schema';
 import { hookGenerator } from '../hook/generator';
 import { join } from 'path';
@@ -32,16 +32,25 @@ export async function apiGeneratorInternal(
     tmpl: ""
   }
 
+  console.log(templateOptions)
+
   createApiFiles(tree, templateOptions);
   addMiscFiles(tree, templateOptions);
   addToIndex(tree, templateOptions);
+  await formatFiles(tree);
 
   if (normalizedOptions.hook || normalizedOptions.mutation || normalizedOptions.query) {
+    const {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      packageName, mapper, types, helper, constant,
+      ...hookOptions
+    } = options;
     await hookGenerator(tree, {
-      ...normalizedOptions,
+      ...hookOptions,
       name: templateOptions.noPrefixName,
     });
   }
+
 }
 
 function createApiFiles(host: Tree, options: NormalizedApiGeneratorSchema) {

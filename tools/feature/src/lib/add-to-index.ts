@@ -5,7 +5,7 @@ import { filterMiscOptions } from "./add-misc-file";
 export type Filtered<A, T> = Pick<A, Extract<keyof A, T>>;
 
 const asExportText = (filePath: string) => {
-  return Boolean(filePath) ? `export * from "./${filePath}";` : "";
+  return filePath ? `export * from './${filePath}';` : "";
 }
 
 function joinText(lines: string[]) {
@@ -33,15 +33,9 @@ export function addToIndex(host: Tree, options: Normalized<FeatureSchema>) {
   }
 
   let indexSource = host.read(indexFile, "utf-8");
-  const indexSourceLines = indexSource.split("\n");
+  const indexSourceLines = new Set(indexSource.split("\n"));
 
-  exportTexts.forEach(exportTextLine => {
-    if(!indexSourceLines.includes(exportTextLine)) {
-      indexSourceLines.push(exportTextLine);
-    }
-  });
-
-  indexSource = joinText(indexSourceLines)
+  exportTexts.forEach(text => indexSourceLines.add(text));
+  indexSource = joinText([...indexSourceLines])
   host.write(indexFile, indexSource);
-
 }

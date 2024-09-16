@@ -31,7 +31,9 @@
     },
     "hook": {
       "type": "boolean",
-      "description": "Will create the associated hook in the same directory"
+      "description": "Will create the associated hook in the same directory",
+      "default": true
+
     },
     "mutation": {
       "type": "boolean",
@@ -63,7 +65,8 @@
     "types": {
       "type": "boolean",
       "description": "Create a type export in the types.ts file",
-      "alias": "t"
+      "alias": "t",
+      "default": true
     },
     "helper": {
       "type": "boolean",
@@ -78,7 +81,8 @@
     "mapper": {
       "type": "boolean",
       "description": "Create a mapper function in the mapper.ts file",
-      "alias": "m"
+      "alias": "m",
+      "default": true
     }
   },
   "required": ["name"]

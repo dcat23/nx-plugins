@@ -1,8 +1,8 @@
 "use server"
 
 import axios, { handleError } from "@/lib/axios";
-<% if (mapper) { %>import { mapTo<%= noPrefixClassName %> } from "../mapper";<% } %>
-<% if (types) { %>import type { <%= noPrefixClassName %> } from "../types";
+<% if (mapper) { %>import { mapTo<%= noPrefixClassName %> } from "@/<%= relativePath.replace("src/", "") %>";<% } %>
+<% if (types) { %>import type { <%= noPrefixClassName %> } from "@/<%= relativePath.replace("src/", "") %>";
 <% } else { %>
 type <%= noPrefixClassName %> = unknown;<% } %>
 

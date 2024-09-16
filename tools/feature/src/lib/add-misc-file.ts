@@ -3,31 +3,53 @@ import { joinPathFragments, Tree } from "@nx/devkit";
 import { Filtered } from "./add-to-index";
 
 const helperText = (options: Normalized<FeatureSchema>) => {
-  return `export function ${options.noPrefixPropertyName}Helper() {
+  return `
+/**
+* ${commentText("helper", options)} 
+*/
+export function ${options.propertyName}Helper() {
   throw new Error("not implemented");
-}
-`}
+}`}
 
 const typeText = (options: Normalized<FeatureSchema>) => {
-  return `export interface ${options.noPrefixClassName} {}`
+  return `
+/**
+* ${commentText("types", options)}
+*/
+export interface ${options.noPrefixClassName} {
+}`
 }
 
 const constantText = (options: Normalized<FeatureSchema>) => {
-  return `export const ${options.noPrefixConstantName} = null`;
+  return `
+/**
+* ${commentText("constant", options)} 
+*/
+export const ${options.noPrefixConstantName} = null`;
 }
 
 const mapperText = (options: Normalized<FeatureSchema>) =>{
-  return `export function mapTo${options.noPrefixClassName}(data: any): ${options.noPrefixClassName} {
-  
-  return {
-    ...data,
-  }
-}
-`
+  return `
+/**
+* ${commentText("mapper", options)}
+* @param data
+* @returns {${options.noPrefixClassName}}
+*/
+export function mapTo${options.noPrefixClassName}(data: any): ${options.noPrefixClassName} {
+  return { ...data }
+}`
 }
 
 export function isMiscType(key: string): key is MiscType {
   return ["types", "helper", "mapper", "constant"].includes(key);
+}
+
+function commentText(name: MiscType, options: Normalized<FeatureSchema>) {
+  const { packageName, propertyName } = options
+  return `
+* ${packageName} ${propertyName} ${name} 
+* Generated: ${new Date().toDateString()}
+*`
 }
 
 function addMiscFile(host: Tree, options: Normalized<FeatureSchema>, name: MiscType) {
@@ -53,11 +75,29 @@ function addMiscFile(host: Tree, options: Normalized<FeatureSchema>, name: MiscT
 
   const source = host.read(file, "utf-8");
 
-  if (!source.includes(text)) {
+  let skipGenerate: boolean;
+
+  switch (name) {
+    case "constant":
+      skipGenerate = source.includes(options.noPrefixConstantName);
+      break;
+    case "mapper":
+      skipGenerate = source.includes(`mapTo${options.noPrefixClassName}`)
+      break;
+    case "helper":
+      skipGenerate = source.includes(`${options.noPrefixClassName}Helper`)
+      break;
+    default:
+      skipGenerate = source.includes(` ${options.noPrefixClassName} `);
+  }
+
+  if (!skipGenerate) {
     const output = source.concat("\n", text, "\n")
     host.write(file, output)
   }
 }
+
+
 
 export function filterMiscOptions(options: Normalized<FeatureSchema>) {
   return Object.entries(options as Filtered<typeof options, MiscType>)
