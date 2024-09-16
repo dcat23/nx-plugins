@@ -31,7 +31,18 @@
     },
     "hook": {
       "type": "boolean",
-      "description": "Will create the associated hook in the same directory"
+      "description": "Will create the associated hook in the same directory",
+      "alias": "h"
+    },
+    "mutation": {
+      "type": "boolean",
+      "description": "Will create the associated mutation hook in the same directory",
+      "alias": "m"
+    },
+    "query": {
+      "type": "boolean",
+      "description": "Will create the associated query hook in the same directory",
+      "alias": "q"
     }
   },
   "required": ["name"]

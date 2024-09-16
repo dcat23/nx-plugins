@@ -25,12 +25,12 @@ export async function apiGenerator(
   createApiFiles(tree, templateOptions);
   addToIndex(tree, templateOptions);
 
-  if (opts.hook) {
+  if (opts.hook || opts.mutation || opts.query) {
     await hookGenerator(tree, {
-      name: opts.name,
+      ...opts,
+      name: templateOptions.noPrefixName,
       feature: opts.feature,
       directory: options.directory,
-      mutation: true,
     });
   }
 }
