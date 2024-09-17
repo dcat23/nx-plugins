@@ -15,6 +15,10 @@ async function main() {
   const { directory } = await createWorkspace(
     `@dcat23/next-starter@${presetVersion}`,
     {
+      database: "postgres",
+      ui: "mui",
+      style: "tailwind",
+      auth: "github",
       ...options,
       name: options.name,
       packageManager: 'pnpm',

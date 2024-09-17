@@ -174,7 +174,7 @@
     "rootProject": {
       "description": "Create an application at the root of the workspace.",
       "type": "boolean",
-      "default": true,
+      "default": false,
       "hidden": false,
       "x-priority": "internal"
     }
