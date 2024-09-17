@@ -60,7 +60,8 @@
     "types": {
       "type": "boolean",
       "description": "Create a type export in the types.ts file",
-      "alias": "t"
+      "alias": "t",
+      "default": true
     },
     "helper": {
       "type": "boolean",

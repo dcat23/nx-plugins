@@ -1,9 +1,13 @@
 import { create } from "zustand";
+import {
+    <% if (types) { %>type <%= className %>,<% } %>
+} from "<%= importPath %>";
 
 interface I<%= className %>Store {
-
+    <%= propertyName %>: <%= className %> | null;
+    isLoading: boolean;
+    set<%= className %>: (<%= propertyName %>: <%= className %>) => void;
+    toggleLoading: () => void;
 }
 
-export const use<%= className %>Store = create<I<%= className %>Store>((set, get) => ({
-
-}));
+export const use<%= className %>Store = <%- createMethod %>
