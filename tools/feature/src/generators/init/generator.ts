@@ -3,8 +3,8 @@ import {
   addProjectConfiguration,
   formatFiles,
   generateFiles,
-  type GeneratorCallback,
-  readJson,
+  type GeneratorCallback, ProjectConfiguration,
+  readJson, readProjectConfiguration,
   removeDependenciesFromPackageJson,
   runTasksInSerial,
   Tree,
@@ -12,7 +12,7 @@ import {
 } from '@nx/devkit';
 import * as path from 'path';
 import { InitGeneratorSchema } from './schema';
-import { latestVersion } from "./lib/versions";
+import { featureVersion, latestVersion } from "./lib/versions";
 
 export async function initGenerator(tree: Tree, options: InitGeneratorSchema) {
   return initGeneratorInternal(tree, {
@@ -36,7 +36,9 @@ function updateDependencies(host: Tree, schema: InitGeneratorSchema) {
         'zod': latestVersion,
         'zustand': latestVersion,
       },
-      {},
+      {
+        '@dcat23/nx-feature': featureVersion,
+      },
       undefined,
       schema.keepExistingVersions
     )
@@ -70,13 +72,24 @@ function setDefaultTsConfig(tree: Tree, options: InitGeneratorSchema) {
 
 export async function initGeneratorInternal(tree: Tree, options: InitGeneratorSchema) {
   const projectRoot = options.projectRoot;
+  const projectName = options.name;
 
-  addProjectConfiguration(tree, options.name, {
-    root: projectRoot,
-    projectType: 'library',
-    sourceRoot: `${projectRoot}/src`,
-    targets: {},
-  });
+  let projectConfig: ProjectConfiguration;
+
+  try {
+
+    projectConfig = readProjectConfiguration(tree, projectName);
+  } catch (error) {
+
+    console.log({error})
+    projectConfig = {
+      root: projectRoot,
+      projectType: 'library',
+      sourceRoot: `${projectRoot}/src`,
+      targets: {},
+    };
+    addProjectConfiguration(tree, projectName, projectConfig);
+  }
 
   const templateOptions = {
     ...options,
@@ -87,6 +100,7 @@ export async function initGeneratorInternal(tree: Tree, options: InitGeneratorSc
 
   generateFiles(tree, path.join(__dirname, 'files'), projectRoot, templateOptions);
   await formatFiles(tree);
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   let installTask: GeneratorCallback = () => {};
   if (!options.skipPackageJson) {
     installTask = updateDependencies(tree, options);

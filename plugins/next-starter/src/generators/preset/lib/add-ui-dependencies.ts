@@ -20,7 +20,6 @@ export const uiDependencies: Record<
     dependencies: {
       '@radix-ui/themes': latestVersion,
       '@radix-ui/colors': latestVersion,
-      '@radix-ui/react-icons': latestVersion,
     },
     devDependencies: {}
   },
@@ -31,9 +30,16 @@ export const uiDependencies: Record<
 }
 
 export function addUiDependencies(host: Tree, options: NormalizedSchema): GeneratorCallback {
+  const dependencies = {
+    "react-icons": latestVersion,
+    ...uiDependencies[options.ui].dependencies,
+  }
+  const devDependencies = {
+    ...uiDependencies[options.ui].devDependencies
+  }
   return addDependenciesToPackageJson(
     host,
-    uiDependencies[options.ui].dependencies,
-    uiDependencies[options.ui].devDependencies,
+    dependencies,
+    devDependencies,
   )
 }

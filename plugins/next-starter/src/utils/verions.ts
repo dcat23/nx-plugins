@@ -1,6 +1,4 @@
 export const nextStarterVersion = require('../../package.json').version;
-export const featureVersion = 'latest';
-
 export const nxVersion = '19.6.2';
 export const nextVersion = '14.2.6';
 export const nextAuthVersion = '5.0.0-beta.20';

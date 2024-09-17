@@ -10,7 +10,7 @@ import {
 import { addPluginV1 } from '@nx/devkit/src/utils/add-plugin';
 import { InitSchema } from './schema';
 import { reactDomVersion, reactVersion } from '@nx/react/src/utils/versions';
-import { featureVersion, latestVersion, nextVersion, nextAuthVersion , nxVersion, nextStarterVersion } from '../../utils/verions';
+import { latestVersion, nextVersion, nextAuthVersion , nxVersion, nextStarterVersion } from '../../utils/verions';
 import { addGitIgnoreEntry } from '@nx/next/src/utils/add-gitignore-entry';
 
 function updateDependencies(host: Tree, schema: InitSchema) {
@@ -30,13 +30,9 @@ function updateDependencies(host: Tree, schema: InitSchema) {
         'axios': latestVersion,
         'react-dom': reactDomVersion,
         'next-auth': nextAuthVersion,
-        'sonner': latestVersion,
-        'zod': latestVersion,
-        'zustand': latestVersion,
       },
       {
         '@dcat23/next-starter': nextStarterVersion,
-        '@dcat23/nx-feature': featureVersion,
         '@nx/next': nxVersion,
         'prisma': latestVersion
       },

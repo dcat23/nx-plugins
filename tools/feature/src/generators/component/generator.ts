@@ -1,7 +1,8 @@
 import { Tree } from '@nx/devkit';
 import { ComponentGeneratorSchema } from './schema';
-import { addToIndex, normalizeOptions } from '../../lib/utils';
 import { createComponentFile } from './lib/create-component-file';
+import { normalizeOptions } from '../../lib/normalize-options';
+import { addToIndex } from "../../lib/add-to-index";
 
 
 export async function componentGenerator(

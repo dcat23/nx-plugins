@@ -1,6 +1,6 @@
 {
   "name": "@dcat23/nx-feature",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "dependencies": {
     "@nx/devkit": "19.6.2",
     "tslib": "^2.3.0"

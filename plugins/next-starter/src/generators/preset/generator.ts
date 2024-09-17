@@ -1,4 +1,11 @@
-import { addDependenciesToPackageJson, formatFiles, GeneratorCallback, runTasksInSerial, Tree } from '@nx/devkit';
+import {
+  addDependenciesToPackageJson,
+  formatFiles,
+  GeneratorCallback,
+  readProjectConfiguration,
+  runTasksInSerial,
+  Tree,
+} from '@nx/devkit';
 import { Schema } from './schema';
 import { initGenerator as jsInitGenerator } from '@nx/js';
 import { showPossibleWarnings } from '@nx/next/src/generators/application/lib/show-possible-warnings';
@@ -17,6 +24,8 @@ import { addUiDependencies } from './lib/add-ui-dependencies';
 import initGenerator from "../init/generator";
 import { addProject } from "./lib/add-project";
 import { setDefaults } from "./lib/set-defaults";
+import { initGenerator as featureInitGenerator } from '@dcat23/nx-feature';
+
 
 export async function presetGenerator(
   host: Tree,
@@ -53,10 +62,17 @@ export async function presetGeneratorInternal(
   });
   tasks.push(initTask);
 
+
   createApplicationFiles(host, options);
 
   addProject(host, options);
-  // addFeature(host, options);
+
+  const featureInitTask = await featureInitGenerator(host, {
+    ...options,
+    projectRoot: options.appProjectRoot,
+    keepExistingVersions: true
+  });
+  tasks.push(featureInitTask);
 
   const e2eTask = await addE2e(host, options);
   tasks.push(e2eTask);
@@ -111,7 +127,6 @@ export async function presetGeneratorInternal(
     logShowProjectCommand(options.projectName);
   });
 
-  console.log("run tasks in serial")
   return runTasksInSerial(...tasks);
 }
 

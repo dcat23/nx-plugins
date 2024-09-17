@@ -34,8 +34,6 @@ describe('app', () => {
       expect(tree.exists(`${name}/src/app/providers.tsx`)).toBeTruthy();
       expect(tree.exists(`${name}/src/app/api/auth/[...nextauth]/route.ts`)).toBeTruthy();
       expect(tree.exists(`${name}/src/lib/auth/index.ts`)).toBeTruthy();
-      expect(tree.exists(`${name}/src/lib/axios.ts`)).toBeTruthy();
-      expect(tree.exists(`${name}/src/lib/config.ts`)).toBeTruthy();
       expect(tree.exists(`${name}/public/favicon.ico`)).toBeTruthy();
     });
 
@@ -64,8 +62,6 @@ describe('app', () => {
       expect(tree.exists(`src/app/providers.tsx`)).toBeTruthy();
       expect(tree.exists(`src/app/api/auth/[...nextauth]/route.ts`)).toBeTruthy();
       expect(tree.exists(`src/lib/auth/index.ts`)).toBeTruthy();
-      expect(tree.exists(`src/lib/axios.ts`)).toBeTruthy();
-      expect(tree.exists(`src/lib/config.ts`)).toBeTruthy();
       expect(tree.exists(`public/favicon.ico`)).toBeTruthy();
     });
 
@@ -153,9 +149,23 @@ describe('app', () => {
       });
       const packageJson = readJson(tree, `package.json`);
       expect(packageJson.dependencies['@radix-ui/themes']).toBeTruthy();
-      expect(packageJson.dependencies['@radix-ui/react-icons']).toBeTruthy();
       const layoutTsx = tree.read(`${name}/src/app/providers.tsx`);
       expect(layoutTsx.includes("import { Theme } from '@radix-ui/themes'")).toBeTruthy();
+    });
+  });
+
+  describe('Feature plugin', () => {
+    it('should generate feature plugin files', async () => {
+      const name = uniq();
+      await presetGenerator(tree, {
+        name,
+        style: 'css',
+        ui: 'radix',
+        projectNameAndRootFormat: 'as-provided',
+      });
+      const packageJson = readJson(tree, `package.json`);
+      expect(packageJson.devDependencies["@dcat23/nx-feature"]).toBeTruthy();
+      expect(tree.exists(`${name}/src/lib/axios/index.ts`)).toBeTruthy();
     });
   });
 
