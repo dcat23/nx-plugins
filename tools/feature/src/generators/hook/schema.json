@@ -51,7 +51,7 @@
     "allMisc": {
       "type": "boolean",
       "description": "Creates all Miscellaneous files (type, helper, mapper, constant)",
-      "alias": "all"
+      "alias": "a"
     },
     "misc": {
       "type": "array",
@@ -64,7 +64,7 @@
     },
     "helper": {
       "type": "boolean",
-      "description": "Create a helper method in the helper.ts file",
+      "description": "Create a helper method in the helpers.ts file",
       "alias": "h"
     },
     "constant": {

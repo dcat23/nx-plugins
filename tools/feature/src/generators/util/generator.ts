@@ -1,9 +1,9 @@
-import { generateFiles, OverwriteStrategy, Tree } from '@nx/devkit';
+import { formatFiles, generateFiles, OverwriteStrategy, Tree } from '@nx/devkit';
 import { NormalizedUtilGeneratorSchema, UtilGeneratorSchema } from './schema';
-import { normalizeOptions } from "../../lib/utils";
 import { addMiscFiles } from "../../lib/add-misc-file";
 import { addToIndex } from "../../lib/add-to-index";
 import { join } from "path";
+import { normalizeOptions } from "../../lib/normalize-options";
 
 export async function utilGenerator(
   tree: Tree,
@@ -45,6 +45,7 @@ export async function utilGeneratorInternal(
   createUtilFile(tree, normalizedOptions)
   addMiscFiles(tree, normalizedOptions)
   addToIndex(tree, normalizedOptions);
+  await formatFiles(tree);
 }
 
 export default utilGenerator;

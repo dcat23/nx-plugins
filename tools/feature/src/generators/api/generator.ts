@@ -2,9 +2,10 @@ import { formatFiles, generateFiles, OverwriteStrategy, Tree } from '@nx/devkit'
 import { ApiGeneratorSchema, NormalizedApiGeneratorSchema } from './schema';
 import { hookGenerator } from '../hook/generator';
 import { join } from 'path';
-import { normalizeOptions } from '../../lib/utils';
+import { importPath } from '../../lib/utils';
 import { addMiscFiles } from "../../lib/add-misc-file";
 import { addToIndex } from "../../lib/add-to-index";
+import { normalizeOptions } from "../../lib/normalize-options";
 
 export async function apiGenerator(
   tree: Tree,
@@ -29,6 +30,7 @@ export async function apiGeneratorInternal(
 
   const templateOptions = {
     ...normalizedOptions,
+    importPath: importPath(normalizedOptions),
     tmpl: ""
   }
 

@@ -4,7 +4,7 @@ import axios, { handleError } from "@/lib/axios";
 import {
   <% if (mapper) { %>mapTo<%= noPrefixClassName %>,<% } %>
   <% if (types) { %>type <%= noPrefixClassName %>,<% } %>
-} from "@/<%= relativePath.replace("src/", "") %>";
+} from "<%= importPath %>";
 
 export async function <%= propertyName %>(body: unknown): Promise<<%= noPrefixClassName %>> {
   const params: URLSearchParams = new URLSearchParams();
@@ -15,7 +15,7 @@ export async function <%= propertyName %>(body: unknown): Promise<<%= noPrefixCl
     <% if (mapper) { %>
       return mapTo<%= noPrefixClassName %>(data)
     <% } else { %>
-      return data
+      return data;
     <% } %>
   } catch (error: any) {
     return handleError(error)

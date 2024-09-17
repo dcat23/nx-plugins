@@ -1,11 +1,12 @@
 import { formatFiles, generateFiles, OverwriteStrategy, Tree } from '@nx/devkit';
 import { HookGeneratorSchema, NormalizedHookGeneratorSchema } from './schema';
 import { join } from 'path';
-import { normalizeOptions } from '../../lib/utils';
 import { prefixName } from './lib/normalize-options';
 import { mutationOptions, queryOptions } from "./lib/helper";
 import { addMiscFiles } from "../../lib/add-misc-file";
 import { addToIndex } from "../../lib/add-to-index";
+import { normalizeOptions } from "../../lib/normalize-options";
+import { importPath } from "../../lib/utils";
 
 
 export async function hookGenerator(
@@ -21,6 +22,7 @@ export async function hookGenerator(
     ...options,
   });
 }
+
 export async function hookGeneratorInternal(
   tree: Tree,
   options: HookGeneratorSchema
@@ -38,6 +40,7 @@ export async function hookGeneratorInternal(
     ...normalizedOptions,
     ...mutationOptions(normalizedOptions),
     ...queryOptions(normalizedOptions),
+    importPath: importPath(normalizedOptions),
     tmpl: "",
   }
 

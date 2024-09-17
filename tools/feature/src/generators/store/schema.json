@@ -12,6 +12,66 @@
         "index": 0
       },
       "x-prompt": "What name would you like to use?"
+    },
+    "feature": {
+      "type": "string",
+      "description": "The package name to store the hook component",
+      "$default": {
+        "$source": "argv",
+        "index": 1
+      }
+    },
+    "directory": {
+      "type": "string",
+      "description": "Where to create the hook component"
+    },
+    "skipExport": {
+      "type": "boolean",
+      "description": "Will skip adding file to index.ts"
+    },
+    "storeType": {
+      "type": "string",
+      "description": "Wil create a store using this state manager",
+      "default": "zustand"
+    },
+    "packageName": {
+      "type": "string",
+      "description": "Where to create the hook component package in the source directory",
+      "default": "store"
+    },
+    "skipPackage": {
+      "type": "boolean",
+      "description": "Will skip creating package and store in source directory"
+    },
+    "allMisc": {
+      "type": "boolean",
+      "description": "Creates all Miscellaneous files (type, helper, mapper, constant)",
+      "alias": "a"
+    },
+    "misc": {
+      "type": "array",
+      "description": "Miscellaneous files to create (type, helper, mapper, constant)"
+    },
+    "types": {
+      "type": "boolean",
+      "description": "Create a type export in the types.ts file",
+      "default": true,
+      "alias": "t"
+    },
+    "helper": {
+      "type": "boolean",
+      "description": "Create a helper method in the helpers.ts file",
+      "alias": "h"
+    },
+    "constant": {
+      "type": "boolean",
+      "description": "Create a constant variable in the constant.ts file",
+      "alias": "c"
+    },
+    "mapper": {
+      "type": "boolean",
+      "description": "Create a mapper function in the mapper.ts file",
+      "alias": "m"
     }
   },
   "required": ["name"]
