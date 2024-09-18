@@ -40,6 +40,7 @@ export function createApplicationFiles(host: Tree, options: NormalizedSchema): v
   const templateVariables = {
     ...names(options.name),
     ...options,
+    authSecret: require('crypto').randomBytes(32).toString('hex'),
     dot: '.',
     tmpl: '',
     offsetFromRoot,
