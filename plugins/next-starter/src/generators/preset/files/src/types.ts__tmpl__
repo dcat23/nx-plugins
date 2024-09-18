@@ -1,0 +1,7 @@
+/**
+ *
+ * store theme types
+ * Generated: Wed Sep 18 2024
+ *
+ */
+export type Theme = "light" | "dark";
