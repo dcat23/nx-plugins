@@ -22,6 +22,8 @@
  * SOFTWARE.
  */
 
+<% if (ui === "mui") { %>
+
 'use client';
 
 import { Fira_Code } from 'next/font/google';
@@ -151,3 +153,4 @@ const theme = (mode: Theme) => createTheme({
 });
 
 export default theme;
+<% } %>

@@ -41,8 +41,6 @@ export async function utilGeneratorInternal(
     options,
   );
 
-  console.log(normalizedOptions)
-
   if (!normalizedOptions.skipFile) {
     createUtilFile(tree, normalizedOptions)
   } else {

@@ -107,7 +107,7 @@ export function createApplicationFiles(host: Tree, options: NormalizedSchema): v
     generateFiles(
       host,
       join(__dirname, '../files/theme', options.ui),
-      join(generatedAppFilePath),
+      join(generatedAppFilePath, 'lib', 'providers'),
       templateVariables
     );
   } else {
