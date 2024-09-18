@@ -97,28 +97,19 @@ export function createApplicationFiles(host: Tree, options: NormalizedSchema): v
       );
     }
 
-    if (options.style === 'styled-components') {
-      generateFiles(
-        host,
-        join(__dirname, '../files/app-styled-components'),
-        join(generatedAppFilePath, 'app'),
-        templateVariables
-      );
-    } else if (options.style === 'styled-jsx') {
-      generateFiles(
-        host,
-        join(__dirname, '../files/app-styled-jsx'),
-        join(generatedAppFilePath, 'app'),
-        templateVariables
-      );
-    } else {
-      generateFiles(
-        host,
-        join(__dirname, '../files/app-default-layout'),
-        join(generatedAppFilePath, 'app'),
-        templateVariables
-      );
-    }
+    generateFiles(
+      host,
+      join(__dirname, '../files/app-default-layout'),
+      join(generatedAppFilePath, 'app'),
+      templateVariables
+    );
+
+    generateFiles(
+      host,
+      join(__dirname, '../files/theme', options.ui),
+      join(generatedAppFilePath),
+      templateVariables
+    );
   } else {
     generateFiles(
       host,
