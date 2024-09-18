@@ -17,7 +17,3 @@ export function handleError(error: any) {
   console.error("Unhandled Error:", error);
   return error.message || "Unhandled error"
 };
-
-export default api
-
-

@@ -48,8 +48,6 @@ export async function storeGeneratorInternal(
     tmpl: ""
   }
 
-  console.log(normalizedOptions)
-
   createStoreFiles(tree, templateOptions);
   addMiscFiles(tree, templateOptions);
   addToIndex(tree, templateOptions);

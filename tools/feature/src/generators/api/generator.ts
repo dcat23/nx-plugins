@@ -34,8 +34,6 @@ export async function apiGeneratorInternal(
     tmpl: ""
   }
 
-  console.log(templateOptions)
-
   createApiFiles(tree, templateOptions);
   addMiscFiles(tree, templateOptions);
   addToIndex(tree, templateOptions);

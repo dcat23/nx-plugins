@@ -19,10 +19,10 @@ async function main() {
       ui: "mui",
       style: "tailwind",
       auth: "github",
-      ...options,
       name: options.name,
       packageManager: 'pnpm',
       nxCloud: 'github',
+      ...options,
     }
   );
 

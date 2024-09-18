@@ -1,4 +1,4 @@
-import { formatFiles, generateFiles, OverwriteStrategy, Tree } from '@nx/devkit';
+import { formatFiles, generateFiles, joinPathFragments, OverwriteStrategy, Tree } from '@nx/devkit';
 import { NormalizedUtilGeneratorSchema, UtilGeneratorSchema } from './schema';
 import { addMiscFiles } from "../../lib/add-misc-file";
 import { addToIndex } from "../../lib/add-to-index";
@@ -25,7 +25,7 @@ function createUtilFile(host: Tree, options: NormalizedUtilGeneratorSchema) {
       tmpl: ""
     },
     {
-      overwriteStrategy: OverwriteStrategy.Overwrite
+      overwriteStrategy: OverwriteStrategy.KeepExisting
     }
   )
 }
@@ -41,8 +41,13 @@ export async function utilGeneratorInternal(
     options,
   );
 
-  normalizedOptions.filePath = ""
-  createUtilFile(tree, normalizedOptions)
+  console.log(normalizedOptions)
+
+  if (!normalizedOptions.skipFile) {
+    createUtilFile(tree, normalizedOptions)
+  } else {
+    normalizedOptions.filePath = ""
+  }
   addMiscFiles(tree, normalizedOptions)
   addToIndex(tree, normalizedOptions);
   await formatFiles(tree);

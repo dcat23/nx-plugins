@@ -52,23 +52,23 @@ export async function normalizeOptions<
 
 
   return {
-    ...options,
-    name,
     artifactName,
     className,
     constantName,
     fileName,
     propertyName,
-    directory,
     filePath,
     indexPath,
     relativePath,
+    ...options,
+    name,
+    directory,
     projectName,
     helper,
     mapper,
     constant,
     types,
-    ...noPrefixName(name),
+    ...noPrefixName(artifactName),
   };
 
 }
