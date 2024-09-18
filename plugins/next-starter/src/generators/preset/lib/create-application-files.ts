@@ -15,6 +15,7 @@ import {
   createStyleRules,
 } from '@nx/next/src/generators/application/lib/create-application-files.helpers';
 import { join } from 'path';
+import { randomBytes } from 'crypto';
 
 export function createApplicationFiles(host: Tree, options: NormalizedSchema): void {
   const offsetFromRoot = _offsetFromRoot(options.appProjectRoot);
@@ -37,10 +38,11 @@ export function createApplicationFiles(host: Tree, options: NormalizedSchema): v
         ? 'app/'
         : 'pages/'
     : '';
+  const authSecret = randomBytes(32).toString('hex')
   const templateVariables = {
     ...names(options.name),
     ...options,
-    authSecret: require('crypto').randomBytes(32).toString('hex'),
+    authSecret,
     dot: '.',
     tmpl: '',
     offsetFromRoot,

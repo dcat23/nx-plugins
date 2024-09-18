@@ -11,6 +11,8 @@ import theme from './theme';
 import { Theme } from '@radix-ui/themes';
 <% } %>
 
+import ThemeProvider from '@/lib/providers/theme-provider';
+
 interface Props {
   children: ReactNode;
 }
@@ -19,23 +21,13 @@ const Providers = ({ children }: Props) => {
   return (
     <SessionProvider>
       <ReactQueryProvider>
-        <% if (ui === "mui") { %>
-        <AppRouterCacheProvider options={{ enableCssLayer: true }}>
-          <ThemeProvider theme={theme}>
         <% } else if (ui === 'radix') { %>
             <Theme>
         <% } %>
-          <% if (ui === "mui") { %>
-          <CssBaseline />
-          <% } %>
           <Toaster position="bottom-right" />
           {children}
         <% if (ui === "mui") { %>
           </ThemeProvider>
-        </AppRouterCacheProvider>
-        <% } else if (ui === 'radix'){ %>
-        </Theme>
-        <% } %>
       </ReactQueryProvider>
     </SessionProvider>
   );
