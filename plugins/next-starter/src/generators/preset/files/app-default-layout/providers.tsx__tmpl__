@@ -2,16 +2,8 @@ import React, { ReactNode } from "react";
 import { SessionProvider } from "next-auth/react";
 import { Toaster } from "sonner";
 import ReactQueryProvider from "@/lib/providers/react-query-provider";
-<% if (ui === "mui") { %>
-import { AppRouterCacheProvider } from '@mui/material-nextjs/v14-appRouter';
-import { ThemeProvider } from '@mui/material/styles';
-import CssBaseline from '@mui/material/CssBaseline';
-import theme from './theme';
-<% } else if (ui === 'radix'){ %>
-import { Theme } from '@radix-ui/themes';
-<% } %>
-
 import ThemeProvider from '@/lib/providers/theme-provider';
+
 
 interface Props {
   children: ReactNode;
@@ -21,13 +13,10 @@ const Providers = ({ children }: Props) => {
   return (
     <SessionProvider>
       <ReactQueryProvider>
-        <% } else if (ui === 'radix') { %>
-            <Theme>
-        <% } %>
+        <ThemeProvider>
           <Toaster position="bottom-right" />
           {children}
-        <% if (ui === "mui") { %>
-          </ThemeProvider>
+        </ThemeProvider>
       </ReactQueryProvider>
     </SessionProvider>
   );
