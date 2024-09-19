@@ -22,6 +22,8 @@ async function main() {
       name: options.name,
       packageManager: 'pnpm',
       nxCloud: 'github',
+      rootProject: true,
+      ci: this.nxCloud,
       ...options,
     }
   );

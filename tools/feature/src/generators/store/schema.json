@@ -72,6 +72,12 @@
       "type": "boolean",
       "description": "Create a mapper function in the mapper.ts file",
       "alias": "m"
+    },
+    "persist": {
+      "type": "boolean",
+      "description": "Create store with persistence enabled",
+      "alias": "p",
+      "default": false
     }
   },
   "required": ["name"]

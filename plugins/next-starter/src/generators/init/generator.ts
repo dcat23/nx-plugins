@@ -10,13 +10,16 @@ import {
 import { addPluginV1 } from '@nx/devkit/src/utils/add-plugin';
 import { InitSchema } from './schema';
 import { reactDomVersion, reactVersion } from '@nx/react/src/utils/versions';
-import { latestVersion, nextVersion, nextAuthVersion , nxVersion, nextStarterVersion } from '../../utils/verions';
+import { latestVersion, nextAuthVersion, nextStarterVersion, nextVersion } from '../../utils/verions';
 import { addGitIgnoreEntry } from '@nx/next/src/utils/add-gitignore-entry';
 
 function updateDependencies(host: Tree, schema: InitSchema) {
   const tasks: GeneratorCallback[] = [];
 
-  tasks.push(removeDependenciesFromPackageJson(host, ['@dcat23/next-starter'], []));
+  tasks.push(removeDependenciesFromPackageJson(host, ['@dcat23/next-starter'], [
+    '@nx/next',
+    '@nx/js',
+  ]));
 
   tasks.push(
     addDependenciesToPackageJson(
@@ -33,7 +36,6 @@ function updateDependencies(host: Tree, schema: InitSchema) {
       },
       {
         '@dcat23/next-starter': nextStarterVersion,
-        '@nx/next': nxVersion,
         'prisma': latestVersion
       },
       undefined,

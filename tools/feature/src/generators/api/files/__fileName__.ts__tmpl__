@@ -1,9 +1,9 @@
 "use server"
 
 import axios, { handleError } from "@/lib/axios";
+<% if (types) { %>import type { <%= noPrefixClassName %> } from "<%= importPath %>";<% } %>
 import {
   <% if (mapper) { %>mapTo<%= noPrefixClassName %>,<% } %>
-  <% if (types) { %>type <%= noPrefixClassName %>,<% } %>
 } from "<%= importPath %>";
 
 export async function <%= propertyName %>(body: unknown): Promise<<%= noPrefixClassName %>> {
