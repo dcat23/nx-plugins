@@ -63,6 +63,7 @@ function addMiscFile(host: Tree, options: Normalized<FeatureSchema>, name: MiscT
 
   const file = joinPathFragments(
     options.indexPath,
+    "utils",
     `${name}.ts`,
   )
 
@@ -85,7 +86,7 @@ function addMiscFile(host: Tree, options: Normalized<FeatureSchema>, name: MiscT
       skipGenerate = source.includes(`mapTo${options.noPrefixClassName}`)
       break;
     case "helper":
-      skipGenerate = source.includes(`${options.noPrefixClassName}Helper`)
+      skipGenerate = source.includes(`${options.propertyName}Helper`)
       break;
     default:
       skipGenerate = source.includes(` ${options.noPrefixClassName} `);

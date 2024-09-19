@@ -1,9 +1,6 @@
 import { create } from "zustand";
 <% if (persist) { %>import { persist } from 'zustand/middleware';<% } %>
-import {
-    <% if (types) { %>type <%= className %>,<% } %>
-} from "<%= importPath %>";
-
+<% if (types) { %>import type { <%= className %> } from "<%= importPath %>";<% } %>
 
 
 interface I<%= className %>Store {

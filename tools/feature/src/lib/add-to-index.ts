@@ -14,17 +14,21 @@ function joinText(lines: string[]) {
 
 export function addToIndex(host: Tree, options: Normalized<FeatureSchema>) {
 
-  if (options.skipExport) return;
 
   const indexFile = joinPathFragments(
     options.indexPath,
     "index.ts",
   )
 
-  const exportTexts = [asExportText(options.filePath)]
+  const exportTexts = []
+
+  if (!options.skipExport) {
+    exportTexts.push(asExportText(options.filePath))
+  }
+
 
   filterMiscOptions(options)
-    .map(asExportText)
+    .map(option => asExportText(`utils/${option}`))
     .forEach(line => exportTexts.push(line));
 
   if (!host.exists(indexFile)) {

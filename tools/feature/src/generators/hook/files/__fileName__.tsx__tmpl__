@@ -1,8 +1,8 @@
 import { toast } from "sonner";
 <%- mutationImport %><%- queryImport %>
+<% if (types) { %>import type { <%= noPrefixClassName %> } from "<%= importPath %>";<% } %>
 import {
-  <% if (types) { %>type <%= noPrefixClassName %>,<% } %>
-  <%= noPrefixPropertyName %>
+<%= noPrefixPropertyName %>
 } from "<%= importPath %>";
 
 export function <%= propertyName %>() {
