@@ -1,6 +1,6 @@
 {
   "name": "@dcat23/create-next-starter",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "private": false,
   "dependencies": {
     "create-nx-workspace": "19.6.2",

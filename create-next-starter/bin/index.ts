@@ -19,11 +19,7 @@ async function main() {
       ui: "mui",
       style: "tailwind",
       auth: "github",
-      name: options.name,
-      packageManager: 'pnpm',
-      nxCloud: 'github',
-      rootProject: true,
-      ci: this.nxCloud,
+      packageManager: "pnpm",
       ...options,
     }
   );

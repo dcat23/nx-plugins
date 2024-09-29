@@ -15,7 +15,11 @@ export async function getCreateWorkspaceOptions(args: string[]) {
         throw new Error('Invalid name pattern');
       }
     })
-    .help();
+    .option("nxCloud", {
+      alias: "ci",
+      type: "string",
+      default: "github"
+    })
 
   const argv = await parser.parse();
   const name = names(argv._[0] as string).name;
