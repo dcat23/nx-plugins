@@ -16,14 +16,10 @@ export function addProject(host: Tree, options: NormalizedSchema): void {
   );
 
   if (!hasPlugin) {
-    addBuildTargetDefaults(host, '@dcat23/next-starter:build');
-
-    targets.dev = {
-      command: 'prisma generate & next dev'
-    }
+    addBuildTargetDefaults(host, '@nx/next:build');
 
     targets.build = {
-      executor: '@dcat23/next-starter:build',
+      executor: '@nx/next:build',
       outputs: ['{options.outputPath}'],
       defaultConfiguration: 'production',
       options: {

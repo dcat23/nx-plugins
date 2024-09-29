@@ -16,10 +16,7 @@ import { addGitIgnoreEntry } from '@nx/next/src/utils/add-gitignore-entry';
 function updateDependencies(host: Tree, schema: InitSchema) {
   const tasks: GeneratorCallback[] = [];
 
-  tasks.push(removeDependenciesFromPackageJson(host, ['@dcat23/next-starter'], [
-    '@nx/next',
-    '@nx/js',
-  ]));
+  tasks.push(removeDependenciesFromPackageJson(host, ['@dcat23/next-starter'], []));
 
   tasks.push(
     addDependenciesToPackageJson(
